@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-AR" class="scroll-smooth">
 <head>
+    <!-- STREAMING_CHUNK:Configuring metadata and SEO... -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -33,6 +34,7 @@
     <meta name="twitter:description" content="Sistema online para gestionar caja diaria, turnos, balances y gastos. Económico y fácil de usar.">
     <meta name="twitter:image" content="https://psmsaas.github.io/psm/psm.png">
 
+    <!-- STREAMING_CHUNK:Loading Tailwind CSS and configuring theme... -->
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -60,6 +62,7 @@
     <!-- Iconos Phosphor (Líneas limpias) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <!-- STREAMING_CHUNK:Adding custom CSS styles and animations... -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -86,8 +89,19 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
             border-color: #a85ca1; /* Toque lila súper sutil en el borde al pasar el mouse */
         }
+
+        /* Animación de levitación suave para la imagen principal */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: floating 5s ease-in-out infinite;
+        }
     </style>
 </head>
+<!-- STREAMING_CHUNK:Building the Hero Section... -->
 <body class="antialiased overflow-x-hidden">
 
     <!-- HERO SECTION -->
@@ -116,16 +130,17 @@
             </div>
         </div>
 
-        <!-- Imagen de Muestra (Panel de Control) -->
+        <!-- Visual / Mockup del Sistema - REEMPLAZADO POR IMAGEN -->
         <div class="flex-1 w-full max-w-lg relative mt-10 lg:mt-0">
-            <!-- Efecto de resplandor de fondo -->
-            <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10"></div>
+            <!-- Efecto de resplandor de fondo pulsante -->
+            <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10 animate-pulse"></div>
             
-            <!-- Tu imagen de mockup -->
-            <img src="./dashboard.png" alt="Panel de control PSM" class="w-full h-auto rounded-2xl shadow-2xl relative z-10 transform transition hover:scale-[1.02] duration-300">
+            <!-- Tu imagen de mockup (dashboard.png) con efecto de movimiento flotante -->
+            <img src="./dashboard.png" alt="Panel de control PSM" class="w-full h-auto relative z-10 drop-shadow-2xl animate-float hover:scale-[1.02] transition-transform duration-300">
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Building the Features Section... -->
     <!-- SECCIÓN CARACTERÍSTICAS -->
     <section id="beneficios" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -174,6 +189,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Building the Use Cases Section... -->
     <!-- SECCIÓN CASOS DE USO -->
     <!-- Usamos el gris oscuro de la marca (#202225) para esta sección -->
     <section id="casos-uso" class="py-20 bg-psm-dark text-white">
@@ -206,11 +222,19 @@
                                 <p class="text-sm text-slate-400 mt-1">Control de pagos de cuotas mensuales, historial de alumnos y gastos fijos del local.</p>
                             </div>
                         </li>
+                        <!-- NUEVO CASO DE USO: DEPÓSITOS Y ALMACENES -->
+                        <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
+                            <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-package text-xl"></i></div>
+                            <div>
+                                <h4 class="font-bold">Depósitos y Almacenes</h4>
+                                <p class="text-sm text-slate-400 mt-1">Control de inventario en tiempo real, alertas de stock bajo y registro de ingresos de mercadería.</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 
                 <div class="flex-1 w-full max-w-sm mx-auto flex justify-center relative">
-                    <!-- Elemento visual central del logo -->
+                    <!-- Elemento visual central del logo: Corregido padding y object-contain -->
                     <div class="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-2xl relative z-10 border-4 border-black/20 overflow-hidden p-6">
                          <img src="./psm.png" alt="Logo PSM" class="w-full h-full object-contain">
                     </div>
@@ -226,6 +250,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Building the Pricing Section... -->
     <!-- PRECIOS -->
     <section id="precio" class="py-24 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -299,6 +324,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Building the Contact Section and Form... -->
     <!-- SECCIÓN CONTACTO / PRESUPUESTO -->
     <section id="contacto" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -312,7 +338,7 @@
             </div>
             
             <div class="bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200 saas-shadow">
-                <!-- REEMPLAZÁ "tu-correo@ejemplo.com" POR TU CORREO REAL ABAJO -->
+                <!-- Configuración con tu correo -->
                 <form action="https://formsubmit.co/catrismperez505@gmail.com" method="POST" class="space-y-6">
                     
                     <!-- Configuración oculta para FormSubmit -->
@@ -360,6 +386,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Building the Footer Section... -->
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -381,6 +408,7 @@
                 <a href="https://wa.me/543454956044" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="WhatsApp">
                     <i class="ph ph-whatsapp-logo text-2xl"></i>
                 </a>
+                <!-- Link de email redirige a la sección contacto para evitar error 404 en GitHub Pages -->
                 <a href="#contacto" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Email">
                     <i class="ph ph-envelope-simple text-2xl"></i>
                 </a>
@@ -390,3 +418,4 @@
 
 </body>
 </html>
+```eof
