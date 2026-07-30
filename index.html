@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-AR" class="scroll-smooth">
 <head>
-    <!-- STREAMING_CHUNK:Configuring metadata and SEO... -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -12,19 +11,17 @@
     <meta name="author" content="PSM Software">
     <meta name="robots" content="index, follow">
     
-    <!-- URL CANÓNICA (Evita contenido duplicado) -->
+    <!-- URL CANÓNICA -->
     <link rel="canonical" href="https://psmsaas.github.io/psm/">
 
     <!-- VERIFICACIÓN DE GOOGLE SEARCH CONSOLE -->
-    <!-- REEMPLAZA EL CONTENIDO CON TU CÓDIGO DE GOOGLE -->
     <meta name="google-site-verification" content="D57tgPkjuJZmoekz7oz3YFp7dSZ7ofYsY_o5IlD9t9s" />
 
-    <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook, LinkedIn) -->
+    <!-- OPEN GRAPH -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://psmsaas.github.io/psm/">
-    <meta property="og:title" content="PSMsaas | Software a medida para tu negocio-emprendimiento">
+    <meta property="og:title" content="PSM | Control Total de tu Negocio">
     <meta property="og:description" content="Olvídate de los cuadernos. Gestiona tu caja, turnos y gastos desde tu celular o PC. Sistema a medida para tu rubro.">
-    <!-- Recomiendo subir una imagen llamada 'portada-social.jpg' a tu GitHub y poner el link exacto aquí -->
     <meta property="og:image" content="https://psmsaas.github.io/psm/PSM2.png">
 
     <!-- TWITTER CARDS -->
@@ -34,7 +31,6 @@
     <meta name="twitter:description" content="Sistema online para gestionar caja diaria, turnos, balances y gastos. Económico y fácil de usar.">
     <meta name="twitter:image" content="https://psmsaas.github.io/psm/psm.png">
 
-    <!-- STREAMING_CHUNK:Loading Tailwind CSS and configuring theme... -->
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -56,29 +52,21 @@
         }
     </script>
     
-    <!-- Google Fonts: Inter para máxima legibilidad y limpieza -->
+    <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Iconos Phosphor (Líneas limpias) -->
+    <!-- Iconos Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <!-- STREAMING_CHUNK:Adding custom CSS styles and animations... -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8FAFC; 
-            color: #202225; /* Usamos tu gris oscuro como texto principal base */
+            color: #202225;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Efecto de cristal para la barra de navegación */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-        }
-
-        /* Sombras suaves para las tarjetas estilo SaaS */
+        /* Sombras suaves estilo SaaS */
         .saas-shadow {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -87,7 +75,7 @@
         .saas-shadow:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-            border-color: #a85ca1; /* Toque lila súper sutil en el borde al pasar el mouse */
+            border-color: #a85ca1;
         }
 
         /* Animación de levitación suave para la imagen principal */
@@ -99,9 +87,50 @@
         .animate-float {
             animation: floating 5s ease-in-out infinite;
         }
+
+        /* --- ANIMACIÓN LATIDO PARA EL LOGO CENTRAL --- */
+        @keyframes pulse-logo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .animate-pulse-logo {
+            animation: pulse-logo 4s ease-in-out infinite;
+        }
+
+        /* --- SISTEMA ORBITAL DE ETIQUETAS FLOTANTES --- */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Contenedor circular que gira suavemente */
+        .orbit-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 320px;
+            height: 320px;
+            margin-top: -160px;
+            margin-left: -160px;
+            animation: spin-slow 22s linear infinite;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* Animación para contrarrestar la rotación y hacer aparecer/desaparecer las etiquetas */
+        @keyframes counter-spin-fade {
+            0% { transform: rotate(360deg); opacity: 0; scale: 0.8; }
+            15% { opacity: 1; scale: 1; }
+            85% { opacity: 1; scale: 1; }
+            100% { transform: rotate(0deg); opacity: 0; scale: 0.8; }
+        }
+
+        .orbit-item {
+            position: absolute;
+            animation: counter-spin-fade 22s ease-in-out infinite;
+        }
     </style>
 </head>
-<!-- STREAMING_CHUNK:Building the Hero Section... -->
 <body class="antialiased overflow-x-hidden">
 
     <!-- HERO SECTION -->
@@ -130,17 +159,16 @@
             </div>
         </div>
 
-        <!-- Visual / Mockup del Sistema - REEMPLAZADO POR IMAGEN -->
+        <!-- Visual / Mockup del Sistema -->
         <div class="flex-1 w-full max-w-lg relative mt-10 lg:mt-0">
-            <!-- Efecto de resplandor de fondo pulsante -->
+            <!-- Efecto de resplandor de fondo -->
             <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10 animate-pulse"></div>
             
-            <!-- Tu imagen de mockup (dashboard.png) con efecto de movimiento flotante -->
+            <!-- Imagen con animación flotante -->
             <img src="./dashboard.png" alt="Panel de control PSM" class="w-full h-auto relative z-10 drop-shadow-2xl animate-float hover:scale-[1.02] transition-transform duration-300">
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Building the Features Section... -->
     <!-- SECCIÓN CARACTERÍSTICAS -->
     <section id="beneficios" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -189,14 +217,12 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Building the Use Cases Section... -->
     <!-- SECCIÓN CASOS DE USO -->
-    <!-- Usamos el gris oscuro de la marca (#202225) para esta sección -->
-    <section id="casos-uso" class="py-20 bg-psm-dark text-white">
+    <section id="casos-uso" class="py-20 bg-psm-dark text-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
-                <div class="flex-1">
+                <div class="flex-1 z-10 relative">
                     <h2 class="text-3xl font-bold mb-6">Un sistema que se adapta a tu rubro</h2>
                     <p class="text-slate-300 mb-8">No importa de qué trate tu emprendimiento, PSM está estructurado para registrar la información que realmente importa, sin configuraciones complejas.</p>
                     
@@ -222,7 +248,6 @@
                                 <p class="text-sm text-slate-400 mt-1">Control de pagos de cuotas mensuales, historial de alumnos y gastos fijos del local.</p>
                             </div>
                         </li>
-                        <!-- NUEVO CASO DE USO: DEPÓSITOS Y ALMACENES -->
                         <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
                             <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-package text-xl"></i></div>
                             <div>
@@ -233,24 +258,48 @@
                     </ul>
                 </div>
                 
-                <div class="flex-1 w-full max-w-sm mx-auto flex justify-center relative">
-                    <!-- Elemento visual central del logo: Corregido padding y object-contain -->
-                    <div class="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-2xl relative z-10 border-4 border-black/20 overflow-hidden p-6">
-                         <img src="./psm.png" alt="Logo PSM" class="w-full h-full object-contain">
+                <div class="flex-1 w-full max-w-sm mx-auto flex justify-center relative min-h-[380px] items-center">
+                    
+                    <!-- SISTEMA SOLAR / ÓRBITA DE ETIQUETAS FLOTANTES -->
+                    <div class="orbit-container">
+                        <!-- Etiqueta 1 (Arriba) -->
+                        <div class="orbit-item" style="top: 0; left: 50%; transform: translate(-50%, -50%); animation-delay: 0s;">
+                            <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap">
+                                <i class="ph ph-check-circle text-psm-lilac"></i> Fácil
+                            </div>
+                        </div>
+                        
+                        <!-- Etiqueta 2 (Derecha) -->
+                        <div class="orbit-item" style="top: 50%; right: 0; transform: translate(50%, -50%); animation-delay: -5.5s;">
+                            <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap">
+                                <i class="ph ph-shield-check text-emerald-400"></i> Seguro
+                            </div>
+                        </div>
+
+                        <!-- Etiqueta 3 (Abajo) -->
+                        <div class="orbit-item" style="top: 100%; left: 50%; transform: translate(-50%, -50%); animation-delay: -11s;">
+                            <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap">
+                                <i class="ph ph-lightning text-amber-400"></i> Rápido
+                            </div>
+                        </div>
+
+                        <!-- Etiqueta 4 (Izquierda) -->
+                        <div class="orbit-item" style="top: 50%; left: 0; transform: translate(-50%, -50%); animation-delay: -16.5s;">
+                            <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap">
+                                <i class="ph ph-piggy-bank text-psm-lilac"></i> Económico
+                            </div>
+                        </div>
                     </div>
-                    <!-- Decoraciones flotantes -->
-                    <div class="absolute top-0 right-10 bg-psm-black text-white text-xs font-bold px-3 py-2 rounded-lg shadow-lg rotate-12 flex items-center gap-2 border border-white/10">
-                        <i class="ph ph-check-circle text-psm-lilac"></i> Fácil
-                    </div>
-                    <div class="absolute bottom-10 left-0 bg-psm-black text-white text-xs font-bold px-3 py-2 rounded-lg shadow-lg -rotate-6 flex items-center gap-2 border border-white/10">
-                        <i class="ph ph-lightning text-psm-lilac"></i> Rápido
+
+                    <!-- Logo Central con respiración (Listo para reemplazar src="./psm.png" por "./psm.gif" cuando tengas tu GIF) -->
+                    <div class="w-60 h-60 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(168,92,161,0.25)] relative z-10 border-4 border-black/20 overflow-hidden p-6 animate-pulse-logo">
+                         <img src="./psmg.gif" alt="Logo PSM" class="w-full h-full object-contain">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Building the Pricing Section... -->
     <!-- PRECIOS -->
     <section id="precio" class="py-24 bg-slate-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -258,7 +307,6 @@
             <p class="text-slate-600 mb-12 max-w-2xl mx-auto">Separamos el costo de crear tu sistema del costo de mantenerlo. Así pagas lo justo por el desarrollo inicial y mantienes una cuota baja para que todo siga funcionando perfecto.</p>
             
             <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden mx-auto max-w-2xl">
-                <!-- Toque lila como línea superior de acento -->
                 <div class="bg-psm-dark border-t-4 border-psm-lilac text-white p-3 text-sm font-semibold tracking-widest uppercase">
                     Plan Emprendedor a Medida
                 </div>
@@ -324,13 +372,11 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Building the Contact Section and Form... -->
     <!-- SECCIÓN CONTACTO / PRESUPUESTO -->
     <section id="contacto" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-4 border border-slate-200">
-                    <!-- Icono lila para dar un detalle visual -->
                     <i class="ph ph-envelope-simple text-psm-lilac"></i> Hablemos
                 </div>
                 <h2 class="text-3xl font-bold text-psm-dark mb-4">Solicitá tu presupuesto a medida</h2>
@@ -338,40 +384,29 @@
             </div>
             
             <div class="bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200 saas-shadow">
-                <!-- Configuración con tu correo -->
                 <form action="https://formsubmit.co/catrismperez505@gmail.com" method="POST" class="space-y-6">
                     
-                    <!-- Configuración oculta para FormSubmit -->
                     <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
                     <input type="hidden" name="_template" value="table">
-                    
-                    <!-- ESTA LÍNEA DESACTIVA EL CAPTCHA -->
                     <input type="hidden" name="_captcha" value="false">
-
-                    <!-- REDIRECCIÓN AUTOMÁTICA A TU PÁGINA DE GITHUB PAGES -->
                     <input type="hidden" name="_next" value="https://psmsaas.github.io/psm/">
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Nombre -->
                         <div>
                             <label for="nombre" class="block text-sm font-medium text-slate-700 mb-2">Nombre o Alias</label>
-                            <!-- El focus ring se pinta del lila de la marca -->
                             <input type="text" id="nombre" name="nombre" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Lucas" required>
                         </div>
-                        <!-- Rubro -->
                         <div>
                             <label for="rubro" class="block text-sm font-medium text-slate-700 mb-2">Rubro del Emprendimiento</label>
                             <input type="text" id="rubro" name="rubro" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Kiosco, Barbería, Depósito..." required>
                         </div>
                     </div>
                     
-                    <!-- Contacto -->
                     <div>
                         <label for="contacto_via" class="block text-sm font-medium text-slate-700 mb-2">¿Cómo te contactamos? (WhatsApp o Email)</label>
                         <input type="text" id="contacto_via" name="contacto_via" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Tu número o correo electrónico" required>
                     </div>
 
-                    <!-- Mensaje / Necesidad -->
                     <div>
                         <label for="mensaje" class="block text-sm font-medium text-slate-700 mb-2">¿Qué necesitas resolver en tu negocio?</label>
                         <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white resize-none" placeholder="Cuentame un poco sobre qué te gustaría controlar... (Caja, stock, turnos, etc.)"></textarea>
@@ -386,7 +421,6 @@
         </div>
     </section>
 
-    <!-- STREAMING_CHUNK:Building the Footer Section... -->
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -408,7 +442,6 @@
                 <a href="https://wa.me/543454956044" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="WhatsApp">
                     <i class="ph ph-whatsapp-logo text-2xl"></i>
                 </a>
-                <!-- Link de email redirige a la sección contacto para evitar error 404 en GitHub Pages -->
                 <a href="#contacto" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Email">
                     <i class="ph ph-envelope-simple text-2xl"></i>
                 </a>
