@@ -11,13 +11,13 @@
     <meta name="author" content="PSM Software">
     <meta name="robots" content="index, follow">
     
-    <!-- URL CANÓNICA -->
+    <!-- URL CANÓNICA (Evita contenido duplicado) -->
     <link rel="canonical" href="https://psmsaas.github.io/psm/">
 
     <!-- VERIFICACIÓN DE GOOGLE SEARCH CONSOLE -->
     <meta name="google-site-verification" content="D57tgPkjuJZmoekz7oz3YFp7dSZ7ofYsY_o5IlD9t9s" />
 
-    <!-- OPEN GRAPH -->
+    <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook, LinkedIn) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://psmsaas.github.io/psm/">
     <meta property="og:title" content="PSM | Control Total de tu Negocio">
@@ -52,21 +52,21 @@
         }
     </script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter para máxima legibilidad y limpieza -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Iconos Phosphor -->
+    <!-- Iconos Phosphor (Líneas limpias) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8FAFC; 
-            color: #202225;
+            color: #202225; 
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Sombras suaves estilo SaaS */
+        /* Sombras suaves para las tarjetas estilo SaaS */
         .saas-shadow {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -78,7 +78,7 @@
             border-color: #a85ca1;
         }
 
-        /* Animación de levitación suave para la imagen principal */
+        /* Animación de levitación suave para la imagen principal (Dashboard) */
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
@@ -88,36 +88,38 @@
             animation: floating 5s ease-in-out infinite;
         }
 
-        /* --- ANIMACIÓN LATIDO PARA EL LOGO CENTRAL --- */
+        /* --- ANIMACIONES DEL LOGO Y SISTEMA ORBITAL --- */
+        
+        /* Latido para el logo central (respiración) */
         @keyframes pulse-logo {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            50% { transform: scale(1.05); }
         }
         .animate-pulse-logo {
             animation: pulse-logo 4s ease-in-out infinite;
         }
 
-        /* --- SISTEMA ORBITAL DE ETIQUETAS FLOTANTES --- */
+        /* Rotación continua del contenedor invisible */
         @keyframes spin-slow {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
-        /* Contenedor circular que gira suavemente */
+        /* Contenedor de la órbita (Más grande para no chocar el logo) */
         .orbit-container {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 320px;
-            height: 320px;
-            margin-top: -160px;
-            margin-left: -160px;
+            width: 360px; /* Órbita ampliada */
+            height: 360px;
+            margin-top: -180px; 
+            margin-left: -180px; 
             animation: spin-slow 22s linear infinite;
             pointer-events: none;
             z-index: 20;
         }
 
-        /* Animación para contrarrestar la rotación y hacer aparecer/desaparecer las etiquetas */
+        /* Contragiro y efecto fade para las etiquetas (se mantienen horizontales) */
         @keyframes counter-spin-fade {
             0% { transform: rotate(360deg); opacity: 0; scale: 0.8; }
             15% { opacity: 1; scale: 1; }
@@ -159,12 +161,9 @@
             </div>
         </div>
 
-        <!-- Visual / Mockup del Sistema -->
+        <!-- Imagen del Sistema Animada -->
         <div class="flex-1 w-full max-w-lg relative mt-10 lg:mt-0">
-            <!-- Efecto de resplandor de fondo -->
             <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10 animate-pulse"></div>
-            
-            <!-- Imagen con animación flotante -->
             <img src="./dashboard.png" alt="Panel de control PSM" class="w-full h-auto relative z-10 drop-shadow-2xl animate-float hover:scale-[1.02] transition-transform duration-300">
         </div>
     </section>
@@ -248,6 +247,7 @@
                                 <p class="text-sm text-slate-400 mt-1">Control de pagos de cuotas mensuales, historial de alumnos y gastos fijos del local.</p>
                             </div>
                         </li>
+                        <!-- Caso de uso Depósitos -->
                         <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
                             <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-package text-xl"></i></div>
                             <div>
@@ -258,7 +258,7 @@
                     </ul>
                 </div>
                 
-                <div class="flex-1 w-full max-w-sm mx-auto flex justify-center relative min-h-[380px] items-center">
+                <div class="flex-1 w-full max-w-sm mx-auto flex justify-center relative min-h-[420px] items-center">
                     
                     <!-- SISTEMA SOLAR / ÓRBITA DE ETIQUETAS FLOTANTES -->
                     <div class="orbit-container">
@@ -291,7 +291,7 @@
                         </div>
                     </div>
 
-                    <!-- Logo Central con respiración (Listo para reemplazar src="./psm.png" por "./psm.gif" cuando tengas tu GIF) -->
+                    <!-- Logo Central: Reducido para dar espacio y preparado para recibir el .gif -->
                     <div class="w-60 h-60 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(168,92,161,0.25)] relative z-10 border-4 border-black/20 overflow-hidden p-6 animate-pulse-logo">
                          <img src="./psmg.gif" alt="Logo PSM" class="w-full h-full object-contain">
                     </div>
@@ -388,7 +388,9 @@
                     
                     <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
                     <input type="hidden" name="_template" value="table">
+                    <!-- Evita Captcha -->
                     <input type="hidden" name="_captcha" value="false">
+                    <!-- Redirección -->
                     <input type="hidden" name="_next" value="https://psmsaas.github.io/psm/">
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
