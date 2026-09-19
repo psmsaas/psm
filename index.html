@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO BÁSICO -->
-    <title>Software para Gestión de Caja, Control e Inventario para Negocios u Emprendimientos | PSMsaas</title>
-    <meta name="description" content="Simplificá el control de tu fuente de trabajo con PSMsaas. Sistema online para gestionar caja diaria, agendas, inventario, controles, balances y gastos. Ideal para todo tipo de locales como kioscos, peluquerías, gimnasios, venta de cosas, estéticas, etc.">
+    <title>PSM | Software de Gestión de Caja y Turnos para Negocios u Emprendimientos</title>
+    <meta name="description" content="Simplifica el control de tu emprendimiento con PSM. Sistema online para gestionar caja diaria, turnos, balances y gastos. Ideal para kioscos, peluquerías y gimnasios.">
     <meta name="keywords" content="sistema de gestion, software para kioscos, agenda de turnos, control de caja diaria, software para peluquerias, sistema para gimnasios, SaaS Argentina">
     <meta name="author" content="PSM Software">
     <meta name="robots" content="index, follow">
@@ -15,7 +15,6 @@
     <link rel="canonical" href="https://psmsaas.github.io/psm/">
 
     <!-- VERIFICACIÓN DE GOOGLE SEARCH CONSOLE -->
-    <!-- REEMPLAZA EL CONTENIDO CON TU CÓDIGO DE GOOGLE -->
     <meta name="google-site-verification" content="D57tgPkjuJZmoekz7oz3YFp7dSZ7ofYsY_o5IlD9t9s" />
 
     <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook, LinkedIn) -->
@@ -23,7 +22,6 @@
     <meta property="og:url" content="https://psmsaas.github.io/psm/">
     <meta property="og:title" content="PSM | Control Total de tu Negocio">
     <meta property="og:description" content="Olvídate de los cuadernos. Gestiona tu caja, turnos y gastos desde tu celular o PC. Sistema a medida para tu rubro.">
-    <!-- Recomiendo subir una imagen llamada 'portada-social.jpg' a tu GitHub y poner el link exacto aquí -->
     <meta property="og:image" content="https://psmsaas.github.io/psm/PSM2.png">
 
     <!-- TWITTER CARDS -->
@@ -54,7 +52,7 @@
         "url": "https://psmsaas.github.io/psm/",
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "catrismperez@hotmail.es",
+          "email": "catrismperez505@gmail.com",
           "contactType": "customer support",
           "url": "https://psmsaas.github.io/psm/#contacto"
         }
@@ -83,10 +81,8 @@
         }
     </script>
     
-    <!-- Google Fonts: Inter para máxima legibilidad y limpieza -->
+    <!-- Google Fonts e Iconos Phosphor -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Iconos Phosphor (Líneas limpias) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -95,6 +91,13 @@
             background-color: #F8FAFC; 
             color: #202225; 
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Clase para la barra de navegación translúcida */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
 
         .saas-shadow {
@@ -108,6 +111,7 @@
             border-color: #a85ca1;
         }
 
+        /* --- STREAMING_CHUNK:Configurando animaciones orbitales y de levitación... --- */
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
@@ -117,7 +121,6 @@
             animation: floating 5s ease-in-out infinite;
         }
 
-        /* --- NUEVA FÍSICA PARA EL SISTEMA ORBITAL --- */
         @keyframes pulse-logo {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.03); }
@@ -138,7 +141,7 @@
             to { transform: rotate(-360deg); }
         }
 
-        /* 3. Efecto de aparición/desaparición y escalado independiente */
+        /* 3. Efecto de aparición/desaparición */
         @keyframes fade-pulse {
             0% { opacity: 0; transform: scale(0.7); }
             20% { opacity: 1; transform: scale(1); }
@@ -154,10 +157,35 @@
         }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased overflow-x-hidden relative">
+
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Izquierda -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1 group-hover:border-psm-lilac transition-colors">
+                        <img src="./psm.png" alt="PSM" class="w-full h-full object-contain">
+                    </div>
+                    <span class="font-bold text-psm-dark group-hover:text-psm-lilac transition-colors">PSM</span>
+                </a>
+                
+                <!-- Links Derecha -->
+                <div class="flex items-center gap-4 sm:gap-6">
+                    <a href="herramientas.html" class="text-sm font-semibold text-slate-600 hover:text-psm-lilac transition-colors flex items-center gap-1.5">
+                        <i class="ph ph-toolbox text-lg"></i> <span class="hidden sm:inline">Herramientas</span>
+                    </a>
+                    <a href="#contacto" class="text-sm font-medium text-white bg-psm-black px-4 py-2 rounded-lg hover:bg-psm-dark transition-colors shadow-sm">
+                        Contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- HERO SECTION -->
-    <section class="pt-8 lg:pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+    <section class="pt-28 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
         
         <div class="flex-1 text-center lg:text-left">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-6 border border-slate-200">
@@ -236,7 +264,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
                 
-                <!-- Columna Izquierda: Tarjetas -->
                 <div class="flex-1 w-full z-10 relative">
                     <h2 class="text-3xl font-bold mb-6">Un sistema que se adapta a tu rubro</h2>
                     <p class="text-slate-300 mb-8">No importa de qué trate tu emprendimiento, PSM está estructurado para registrar la información que realmente importa, sin configuraciones complejas.</p>
@@ -273,16 +300,9 @@
                     </ul>
                 </div>
                 
-                <!-- Columna Derecha: Logo Animado alineado hacia la derecha -->
                 <div class="flex-1 w-full flex justify-center md:justify-end md:pr-4 lg:pr-12 relative min-h-[420px] items-center">
-                    
-                    <!-- Contenedor Base (Cuadrado de 380px para dar espacio) -->
                     <div class="relative w-[380px] h-[380px] flex items-center justify-center">
-                        
-                        <!-- Pista de Órbita Giratoria (Con un borde muy sutil) -->
                         <div class="absolute inset-0 animate-orbit border border-white/5 rounded-full z-20 pointer-events-none">
-                            
-                            <!-- Etiqueta 1: FÁCIL (Arriba) -->
                             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
                                 <div class="animate-counter-orbit">
                                     <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: 0s;">
@@ -290,8 +310,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Etiqueta 2: SEGURO (Derecha) -->
                             <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
                                 <div class="animate-counter-orbit">
                                     <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -5.5s;">
@@ -299,8 +317,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Etiqueta 3: RÁPIDO (Abajo) -->
                             <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
                                 <div class="animate-counter-orbit">
                                     <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -11s;">
@@ -308,8 +324,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Etiqueta 4: ECONÓMICO (Izquierda) -->
                             <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
                                 <div class="animate-counter-orbit">
                                     <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -16.5s;">
@@ -317,15 +331,11 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-                        <!-- Logo Central (Estático pero con latido) -->
                         <div class="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(168,92,161,0.25)] relative z-10 border-4 border-black/20 overflow-hidden p-6 animate-pulse-logo">
-                             <!-- LISTO PARA USAR TU GIF: Cambia psm.png por psm.gif si es necesario -->
                              <img src="./psm.gif" onerror="this.src='./psm.png'" alt="Logo PSM" class="w-full h-full object-contain">
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -413,7 +423,7 @@
             </div>
             
             <div class="bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200 saas-shadow">
-                <form action="https://formsubmit.co/catrismperez@hotmail.es" method="POST" class="space-y-6">
+                <form action="https://formsubmit.co/catrismperez505@gmail.com" method="POST" class="space-y-6">
                     
                     <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
                     <input type="hidden" name="_template" value="table">
