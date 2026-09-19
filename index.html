@@ -10,6 +10,7 @@
     <meta name="keywords" content="sistema de gestion, software para kioscos, agenda de turnos, control de caja diaria, software para peluquerias, sistema para gimnasios, SaaS Argentina">
     <meta name="author" content="PSM Software">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
     
     <!-- URL CANÓNICA (Evita contenido duplicado) -->
     <link rel="canonical" href="https://psmsaas.github.io/psm/">
@@ -43,7 +44,7 @@
       "url": "https://psmsaas.github.io/psm/",
       "offers": {
         "@type": "Offer",
-        "price": "15000",
+        "price": "25000",
         "priceCurrency": "ARS"
       },
       "creator": {
@@ -81,8 +82,10 @@
         }
     </script>
     
-    <!-- Google Fonts e Iconos Phosphor -->
+    <!-- Google Fonts: Inter para máxima legibilidad y limpieza -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconos Phosphor -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
@@ -93,7 +96,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Clase para la barra de navegación translúcida */
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
@@ -111,7 +113,6 @@
             border-color: #a85ca1;
         }
 
-        /* --- STREAMING_CHUNK:Configurando animaciones orbitales y de levitación... --- */
         @keyframes floating {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
@@ -129,19 +130,16 @@
             animation: pulse-logo 4s ease-in-out infinite;
         }
 
-        /* 1. Giro hacia adelante (Contenedor) */
         @keyframes orbit-spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
-        /* 2. Contragiro exacto (Etiquetas) para mantenerlas horizontales */
         @keyframes orbit-counter-spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(-360deg); }
         }
 
-        /* 3. Efecto de aparición/desaparición */
         @keyframes fade-pulse {
             0% { opacity: 0; transform: scale(0.7); }
             20% { opacity: 1; transform: scale(1); }
@@ -157,16 +155,16 @@
         }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden relative">
+<body class="antialiased overflow-x-hidden">
 
     <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo Izquierda -->
-                <a href="#" class="flex items-center gap-2 group">
+                <a href="#" class="flex items-center gap-2 group" aria-label="Inicio PSM Software">
                     <div class="w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1 group-hover:border-psm-lilac transition-colors">
-                        <img src="./psm.png" alt="PSM" class="w-full h-full object-contain">
+                        <img src="./psm.png" alt="Logo PSM Pequeño" class="w-full h-full object-contain">
                     </div>
                     <span class="font-bold text-psm-dark group-hover:text-psm-lilac transition-colors">PSM</span>
                 </a>
@@ -185,288 +183,291 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="pt-28 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-        
-        <div class="flex-1 text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-6 border border-slate-200">
-                <span class="flex h-2 w-2 rounded-full bg-psm-lilac animate-pulse"></span>
-                Sistema 100% Online
-            </div>
+    <main>
+        <section class="pt-28 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
             
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-psm-dark leading-tight mb-6">
-                El control de tu negocio, <span class="text-psm-lilac">simplificado al máximo.</span>
-            </h1>
-            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Olvídate de los cuadernos y planillas complejas. Gestiona tu caja diaria, turnos, gastos fijos y balances desde tu celular o PC con una herramienta económica y fácil de usar. <strong class="font-semibold text-psm-dark">Ideal si recién estás arrancando y quieres dar el salto profesional sin complicarte.</strong>
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <a href="#contacto" class="w-full sm:w-auto text-center bg-psm-black text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-psm-dark transition-colors shadow-lg hover:shadow-xl">
-                    Solicitar Presupuesto
-                </a>
-                <a href="#beneficios" class="w-full sm:w-auto text-center bg-white text-psm-dark border border-slate-300 px-8 py-3.5 rounded-full text-base font-medium hover:bg-slate-50 hover:border-psm-lilac transition-colors">
-                    Ver cómo funciona
-                </a>
-            </div>
-        </div>
-
-        <div class="flex-1 w-full max-w-lg relative mt-10 lg:mt-0">
-            <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10 animate-pulse"></div>
-            <img src="./dashboard.png" alt="Panel de control PSM" class="w-full h-auto relative z-10 drop-shadow-2xl animate-float hover:scale-[1.02] transition-transform duration-300">
-        </div>
-    </section>
-
-    <!-- SECCIÓN CARACTERÍSTICAS -->
-    <section id="beneficios" class="py-20 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-psm-dark mb-4">Todo lo que necesitas en un solo lugar</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Reemplaza múltiples aplicaciones y planillas de Excel por un sistema integrado diseñado específicamente para dueños de emprendimientos.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
-                        <i class="ph ph-wallet text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-psm-dark mb-2">Caja Diaria</h3>
-                    <p class="text-sm text-slate-600">Registra ingresos y egresos al instante. Conoce tu saldo real al final del día sin hacer cálculos manuales.</p>
-                </div>
-
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
-                        <i class="ph ph-calendar-plus text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-psm-dark mb-2">Agenda de Turnos</h3>
-                    <p class="text-sm text-slate-600">Organiza las citas de tus clientes visualmente. Evita solapamientos y mantén un historial de visitas.</p>
-                </div>
-
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
-                        <i class="ph ph-chart-line-up text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-psm-dark mb-2">Balances Claros</h3>
-                    <p class="text-sm text-slate-600">Gráficos automáticos que te muestran si tu negocio está ganando o perdiendo plata mes a mes.</p>
-                </div>
-
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
-                        <i class="ph ph-clipboard-text text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-psm-dark mb-2">Gastos Fijos</h3>
-                    <p class="text-sm text-slate-600">Controla alquiler, luz, internet y mercadería. PSM te avisa qué debes pagar y cuándo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCIÓN CASOS DE USO -->
-    <section id="casos-uso" class="py-20 bg-psm-dark text-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
-                
-                <div class="flex-1 w-full z-10 relative">
-                    <h2 class="text-3xl font-bold mb-6">Un sistema que se adapta a tu rubro</h2>
-                    <p class="text-slate-300 mb-8">No importa de qué trate tu emprendimiento, PSM está estructurado para registrar la información que realmente importa, sin configuraciones complejas.</p>
-                    
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
-                            <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-scissors text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold">Peluquerías y Barberías</h4>
-                                <p class="text-sm text-slate-400 mt-1">Gestión de turnos de profesionales, venta de productos en salón y cierre de caja diario.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
-                            <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-storefront text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold">Kioscos y Locales</h4>
-                                <p class="text-sm text-slate-400 mt-1">Ingreso de ventas rápido, control de gastos a proveedores y balance de rentabilidad.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
-                            <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-barbell text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold">Gimnasios y Centros</h4>
-                                <p class="text-sm text-slate-400 mt-1">Control de pagos de cuotas mensuales, historial de alumnos y gastos fijos del local.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
-                            <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-package text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold">Depósitos y Almacenes</h4>
-                                <p class="text-sm text-slate-400 mt-1">Control de inventario en tiempo real, alertas de stock bajo y registro de ingresos de mercadería.</p>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-6 border border-slate-200">
+                    <span class="flex h-2 w-2 rounded-full bg-psm-lilac animate-pulse"></span>
+                    Sistema 100% Online
                 </div>
                 
-                <div class="flex-1 w-full flex justify-center md:justify-end md:pr-4 lg:pr-12 relative min-h-[420px] items-center">
-                    <div class="relative w-[380px] h-[380px] flex items-center justify-center">
-                        <div class="absolute inset-0 animate-orbit border border-white/5 rounded-full z-20 pointer-events-none">
-                            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <div class="animate-counter-orbit">
-                                    <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: 0s;">
-                                        <i class="ph ph-check-circle text-psm-lilac"></i> Fácil
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
-                                <div class="animate-counter-orbit">
-                                    <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -5.5s;">
-                                        <i class="ph ph-shield-check text-emerald-400"></i> Seguro
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                                <div class="animate-counter-orbit">
-                                    <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -11s;">
-                                        <i class="ph ph-lightning text-amber-400"></i> Rápido
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
-                                <div class="animate-counter-orbit">
-                                    <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -16.5s;">
-                                        <i class="ph ph-piggy-bank text-psm-lilac"></i> Económico
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(168,92,161,0.25)] relative z-10 border-4 border-black/20 overflow-hidden p-6 animate-pulse-logo">
-                             <img src="./psm.gif" onerror="this.src='./psm.png'" alt="Logo PSM" class="w-full h-full object-contain">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRECIOS -->
-    <section id="precio" class="py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-psm-dark mb-4">Un precio justo, estructurado para tu éxito</h2>
-            <p class="text-slate-600 mb-12 max-w-2xl mx-auto">Separamos el costo de crear tu sistema del costo de mantenerlo. Así pagas lo justo por el desarrollo inicial y mantienes una cuota baja para que todo siga funcionando perfecto.</p>
-            
-            <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden mx-auto max-w-2xl">
-                <div class="bg-psm-dark border-t-4 border-psm-lilac text-white p-3 text-sm font-semibold tracking-widest uppercase">
-                    Plan Emprendedor a Medida
-                </div>
-                
-                <div class="flex flex-col md:flex-row">
-                    <div class="p-8 md:w-1/2 border-b md:border-b-0 md:border-r border-slate-100 flex flex-col justify-center bg-slate-50/50">
-                        <div class="text-xs font-bold text-psm-lilac uppercase tracking-wider mb-2">Desarrollo y Setup</div>
-                        <div class="flex justify-center items-end gap-1 mb-2">
-                            <span class="text-4xl font-extrabold text-psm-dark">$25.000</span>
-                        </div>
-                        <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Pago único inicial</p>
-                        <p class="text-sm text-slate-600 mb-6 text-left">
-                            Cubrimos la programación, adaptación a tu rubro y configuración de base de datos en la nube.
-                        </p>
-                        <ul class="space-y-3 text-left text-sm mt-auto">
-                            <li class="flex items-start gap-2 text-psm-dark font-medium">
-                                <i class="ph ph-check-circle text-psm-lilac text-lg mt-0.5"></i> 
-                                Sistema adaptado a tus necesidades (Listo en < 7 días)
-                            </li>
-                            <li class="flex items-start gap-2 text-slate-700">
-                                <i class="ph ph-check-circle text-psm-lilac text-lg mt-0.5"></i> 
-                                Creación de usuarios y permisos
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="p-8 md:w-1/2 flex flex-col justify-center">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Licencia y Mantenimiento</div>
-                        <div class="flex justify-center items-end gap-1 mb-2">
-                            <span class="text-4xl font-extrabold text-psm-dark">$15.000</span>
-                            <span class="text-slate-500 text-lg mb-1">/mes</span>
-                        </div>
-                        <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Suscripción fija</p>
-                        <p class="text-sm text-slate-600 mb-6 text-left">
-                            Para mantener tu sistema online, seguro, con copias de respaldo y soporte técnico disponible.
-                        </p>
-                        <ul class="space-y-3 text-left text-sm mt-auto">
-                            <li class="flex items-start gap-2 text-slate-700">
-                                <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
-                                Servidor 100% online (PC y Celular)
-                            </li>
-                            <li class="flex items-start gap-2 text-slate-700">
-                                <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
-                                Respaldos de seguridad en la nube
-                            </li>
-                            <li class="flex items-start gap-2 text-slate-700">
-                                <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
-                                Soporte técnico directo vía WhatsApp
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="p-6 bg-slate-50 border-t border-slate-100">
-                    <a href="#contacto" class="block w-full max-w-sm mx-auto bg-psm-black text-white py-3.5 rounded-xl font-semibold hover:bg-psm-dark hover:shadow-lg transition-all text-center shadow-md">
-                        Solicitar Presupuesto y Empezar
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-psm-dark leading-tight mb-6">
+                    El control de tu negocio, <span class="text-psm-lilac">simplificado al máximo.</span>
+                </h1>
+                <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Olvídate de los cuadernos y planillas complejas. Gestiona tu caja diaria, turnos, gastos fijos y balances desde tu celular o PC con una herramienta económica y fácil de usar. <strong class="font-semibold text-psm-dark">Ideal si recién estás arrancando y quieres dar el salto profesional sin complicarte.</strong>
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#contacto" class="w-full sm:w-auto text-center bg-psm-black text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-psm-dark transition-colors shadow-lg hover:shadow-xl">
+                        Solicitar Presupuesto
+                    </a>
+                    <a href="#beneficios" class="w-full sm:w-auto text-center bg-white text-psm-dark border border-slate-300 px-8 py-3.5 rounded-full text-base font-medium hover:bg-slate-50 hover:border-psm-lilac transition-colors">
+                        Ver cómo funciona
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- SECCIÓN CONTACTO / PRESUPUESTO -->
-    <section id="contacto" class="py-24 bg-white border-t border-slate-100">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-4 border border-slate-200">
-                    <i class="ph ph-envelope-simple text-psm-lilac"></i> Hablemos
+            <div class="flex-1 w-full max-w-lg relative mt-10 lg:mt-0">
+                <div class="absolute -inset-1 bg-gradient-to-tr from-psm-lilac/40 to-slate-300 rounded-[2rem] blur-xl opacity-50 -z-10 animate-pulse"></div>
+                <img src="./dashboard.png" alt="Mockup del Panel de control de PSM Software en PC y celular" class="w-full h-auto relative z-10 drop-shadow-2xl animate-float hover:scale-[1.02] transition-transform duration-300">
+            </div>
+        </section>
+
+        <!-- SECCIÓN CARACTERÍSTICAS -->
+        <section id="beneficios" class="py-20 bg-white border-t border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-psm-dark mb-4">Todo lo que necesitas en un solo lugar</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">Reemplaza múltiples aplicaciones y planillas de Excel por un sistema integrado diseñado específicamente para dueños de emprendimientos.</p>
                 </div>
-                <h2 class="text-3xl font-bold text-psm-dark mb-4">Solicitá tu presupuesto a medida</h2>
-                <p class="text-slate-600">Completá este breve formulario y nos pondremos en contacto con vos para armar un plan que se ajuste exactamente a tu emprendimiento.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <article class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
+                            <i class="ph ph-wallet text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-psm-dark mb-2">Caja Diaria</h3>
+                        <p class="text-sm text-slate-600">Registra ingresos y egresos al instante. Conoce tu saldo real al final del día sin hacer cálculos manuales.</p>
+                    </article>
+
+                    <article class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
+                            <i class="ph ph-calendar-plus text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-psm-dark mb-2">Agenda de Turnos</h3>
+                        <p class="text-sm text-slate-600">Organiza las citas de tus clientes visualmente. Evita solapamientos y mantén un historial de visitas.</p>
+                    </article>
+
+                    <article class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
+                            <i class="ph ph-chart-line-up text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-psm-dark mb-2">Balances Claros</h3>
+                        <p class="text-sm text-slate-600">Gráficos automáticos que te muestran si tu negocio está ganando o perdiendo plata mes a mes.</p>
+                    </article>
+
+                    <article class="bg-slate-50 p-6 rounded-2xl border border-slate-100 saas-shadow group">
+                        <div class="w-12 h-12 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center mb-4 text-psm-dark group-hover:text-psm-lilac transition-colors">
+                            <i class="ph ph-clipboard-text text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-psm-dark mb-2">Gastos Fijos</h3>
+                        <p class="text-sm text-slate-600">Controla alquiler, luz, internet y mercadería. PSM te avisa qué debes pagar y cuándo.</p>
+                    </article>
+                </div>
             </div>
-            
-            <div class="bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200 saas-shadow">
-                <form action="https://formsubmit.co/catrismperez505@gmail.com" method="POST" class="space-y-6">
+        </section>
+
+        <!-- SECCIÓN CASOS DE USO -->
+        <section id="casos-uso" class="py-20 bg-psm-dark text-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-8 lg:gap-12 items-center">
                     
-                    <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
-                    <input type="hidden" name="_template" value="table">
-                    
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="https://psmsaas.github.io/psm/">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="nombre" class="block text-sm font-medium text-slate-700 mb-2">Nombre o Alias</label>
-                            <input type="text" id="nombre" name="nombre" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Lucas" required>
-                        </div>
-                        <div>
-                            <label for="rubro" class="block text-sm font-medium text-slate-700 mb-2">Rubro del Emprendimiento</label>
-                            <input type="text" id="rubro" name="rubro" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Kiosco, Barbería, Depósito..." required>
-                        </div>
+                    <div class="flex-1 w-full z-10 relative">
+                        <h2 class="text-3xl font-bold mb-6">Un sistema que se adapta a tu rubro</h2>
+                        <p class="text-slate-300 mb-8">No importa de qué trate tu emprendimiento, PSM está estructurado para registrar la información que realmente importa, sin configuraciones complejas.</p>
+                        
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
+                                <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-scissors text-xl" aria-hidden="true"></i></div>
+                                <div>
+                                    <h4 class="font-bold">Peluquerías y Barberías</h4>
+                                    <p class="text-sm text-slate-400 mt-1">Gestión de turnos de profesionales, venta de productos en salón y cierre de caja diario.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
+                                <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-storefront text-xl" aria-hidden="true"></i></div>
+                                <div>
+                                    <h4 class="font-bold">Kioscos y Locales</h4>
+                                    <p class="text-sm text-slate-400 mt-1">Ingreso de ventas rápido, control de gastos a proveedores y balance de rentabilidad.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
+                                <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-barbell text-xl" aria-hidden="true"></i></div>
+                                <div>
+                                    <h4 class="font-bold">Gimnasios y Centros</h4>
+                                    <p class="text-sm text-slate-400 mt-1">Control de pagos de cuotas mensuales, historial de alumnos y gastos fijos del local.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-black/20 p-4 rounded-xl border border-white/10 hover:border-psm-lilac/50 transition-colors">
+                                <div class="bg-psm-black p-2 rounded-lg text-white mt-1"><i class="ph ph-package text-xl" aria-hidden="true"></i></div>
+                                <div>
+                                    <h4 class="font-bold">Depósitos y Almacenes</h4>
+                                    <p class="text-sm text-slate-400 mt-1">Control de inventario en tiempo real, alertas de stock bajo y registro de ingresos de mercadería.</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     
-                    <div>
-                        <label for="contacto_via" class="block text-sm font-medium text-slate-700 mb-2">¿Cómo te contactamos? (WhatsApp o Email)</label>
-                        <input type="text" id="contacto_via" name="contacto_via" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Tu número o correo electrónico" required>
+                    <div class="flex-1 w-full flex justify-center md:justify-end md:pr-4 lg:pr-12 relative min-h-[420px] items-center">
+                        <div class="relative w-[380px] h-[380px] flex items-center justify-center">
+                            
+                            <div class="absolute inset-0 animate-orbit border border-white/5 rounded-full z-20 pointer-events-none">
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                    <div class="animate-counter-orbit">
+                                        <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: 0s;">
+                                            <i class="ph ph-check-circle text-psm-lilac"></i> Fácil
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
+                                    <div class="animate-counter-orbit">
+                                        <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -5.5s;">
+                                            <i class="ph ph-shield-check text-emerald-400"></i> Seguro
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                                    <div class="animate-counter-orbit">
+                                        <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -11s;">
+                                            <i class="ph ph-lightning text-amber-400"></i> Rápido
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
+                                    <div class="animate-counter-orbit">
+                                        <div class="bg-psm-black text-white text-xs font-bold px-3.5 py-2 rounded-lg shadow-xl border border-white/10 flex items-center gap-1.5 whitespace-nowrap" style="animation: fade-pulse 22s ease-in-out infinite; animation-delay: -16.5s;">
+                                            <i class="ph ph-piggy-bank text-psm-lilac"></i> Económico
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-64 h-64 bg-white rounded-full flex items-center justify-center shadow-[0_0_40px_rgba(168,92,161,0.25)] relative z-10 border-4 border-black/20 overflow-hidden p-6 animate-pulse-logo">
+                                 <img src="./psm.gif" onerror="this.src='./psm.png'" alt="Logo PSM Animado" class="w-full h-full object-contain">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRECIOS -->
+        <section id="precio" class="py-24 bg-slate-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-psm-dark mb-4">Un precio justo, estructurado para tu éxito</h2>
+                <p class="text-slate-600 mb-12 max-w-2xl mx-auto">Separamos el costo de crear tu sistema del costo de mantenerlo. Así pagas lo justo por el desarrollo inicial y mantienes una cuota baja para que todo siga funcionando perfecto.</p>
+                
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden mx-auto max-w-2xl">
+                    <div class="bg-psm-dark border-t-4 border-psm-lilac text-white p-3 text-sm font-semibold tracking-widest uppercase">
+                        Plan Emprendedor a Medida
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row">
+                        <div class="p-8 md:w-1/2 border-b md:border-b-0 md:border-r border-slate-100 flex flex-col justify-center bg-slate-50/50">
+                            <div class="text-xs font-bold text-psm-lilac uppercase tracking-wider mb-2">Desarrollo y Setup</div>
+                            <div class="flex justify-center items-end gap-1 mb-2">
+                                <span class="text-4xl font-extrabold text-psm-dark">$25.000</span>
+                            </div>
+                            <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Pago único inicial</p>
+                            <p class="text-sm text-slate-600 mb-6 text-left">
+                                Cubrimos la programación, adaptación a tu rubro y configuración de base de datos en la nube.
+                            </p>
+                            <ul class="space-y-3 text-left text-sm mt-auto">
+                                <li class="flex items-start gap-2 text-psm-dark font-medium">
+                                    <i class="ph ph-check-circle text-psm-lilac text-lg mt-0.5"></i> 
+                                    Sistema adaptado a tus necesidades (Listo en < 7 días)
+                                </li>
+                                <li class="flex items-start gap-2 text-slate-700">
+                                    <i class="ph ph-check-circle text-psm-lilac text-lg mt-0.5"></i> 
+                                    Creación de usuarios y permisos
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Licencia y Mantenimiento</div>
+                            <div class="flex justify-center items-end gap-1 mb-2">
+                                <span class="text-4xl font-extrabold text-psm-dark">$15.000</span>
+                                <span class="text-slate-500 text-lg mb-1">/mes</span>
+                            </div>
+                            <p class="text-slate-500 text-xs font-medium uppercase tracking-wider mb-4">Suscripción fija</p>
+                            <p class="text-sm text-slate-600 mb-6 text-left">
+                                Para mantener tu sistema online, seguro, con copias de respaldo y soporte técnico disponible.
+                            </p>
+                            <ul class="space-y-3 text-left text-sm mt-auto">
+                                <li class="flex items-start gap-2 text-slate-700">
+                                    <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
+                                    Servidor 100% online (PC y Celular)
+                                </li>
+                                <li class="flex items-start gap-2 text-slate-700">
+                                    <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
+                                    Respaldos de seguridad en la nube
+                                </li>
+                                <li class="flex items-start gap-2 text-slate-700">
+                                    <i class="ph ph-check-circle text-emerald-500 text-lg mt-0.5"></i> 
+                                    Soporte técnico directo vía WhatsApp
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div>
-                        <label for="mensaje" class="block text-sm font-medium text-slate-700 mb-2">¿Qué necesitas resolver en tu negocio?</label>
-                        <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white resize-none" placeholder="Cuentame un poco sobre qué te gustaría controlar... (Caja, stock, turnos, etc.)"></textarea>
+                    <div class="p-6 bg-slate-50 border-t border-slate-100">
+                        <a href="#contacto" class="block w-full max-w-sm mx-auto bg-psm-black text-white py-3.5 rounded-xl font-semibold hover:bg-psm-dark hover:shadow-lg transition-all text-center shadow-md">
+                            Solicitar Presupuesto y Empezar
+                        </a>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-psm-black text-white py-4 rounded-xl font-semibold hover:bg-psm-dark transition-colors shadow-lg flex items-center justify-center gap-2">
-                        Enviar Solicitud <i class="ph ph-paper-plane-right"></i>
-                    </button>
-                    <p class="text-center text-xs text-slate-500 mt-4">Tus datos están seguros. Te responderemos a la brevedad.</p>
-                </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- SECCIÓN CONTACTO / PRESUPUESTO -->
+        <section id="contacto" class="py-24 bg-white border-t border-slate-100">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-4 border border-slate-200">
+                        <i class="ph ph-envelope-simple text-psm-lilac"></i> Hablemos
+                    </div>
+                    <h2 class="text-3xl font-bold text-psm-dark mb-4">Solicitá tu presupuesto a medida</h2>
+                    <p class="text-slate-600">Completá este breve formulario y nos pondremos en contacto con vos para armar un plan que se ajuste exactamente a tu emprendimiento.</p>
+                </div>
+                
+                <div class="bg-slate-50 p-6 md:p-10 rounded-3xl border border-slate-200 saas-shadow">
+                    <form action="https://formsubmit.co/catrismperez505@gmail.com" method="POST" class="space-y-6">
+                        
+                        <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://psmsaas.github.io/psm/">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nombre" class="block text-sm font-medium text-slate-700 mb-2">Nombre o Alias</label>
+                                <input type="text" id="nombre" name="nombre" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Lucas" required>
+                            </div>
+                            <div>
+                                <label for="rubro" class="block text-sm font-medium text-slate-700 mb-2">Rubro del Emprendimiento</label>
+                                <input type="text" id="rubro" name="rubro" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Ej: Kiosco, Barbería, Depósito..." required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="contacto_via" class="block text-sm font-medium text-slate-700 mb-2">¿Cómo te contactamos? (WhatsApp o Email)</label>
+                            <input type="text" id="contacto_via" name="contacto_via" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white" placeholder="Tu número o correo electrónico" required>
+                        </div>
+
+                        <div>
+                            <label for="mensaje" class="block text-sm font-medium text-slate-700 mb-2">¿Qué necesitas resolver en tu negocio?</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-psm-lilac focus:border-psm-lilac outline-none transition-all bg-white resize-none" placeholder="Cuentame un poco sobre qué te gustaría controlar... (Caja, stock, turnos, etc.)"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-psm-black text-white py-4 rounded-xl font-semibold hover:bg-psm-dark transition-colors shadow-lg flex items-center justify-center gap-2">
+                            Enviar Solicitud <i class="ph ph-paper-plane-right" aria-hidden="true"></i>
+                        </button>
+                        <p class="text-center text-xs text-slate-500 mt-4">Tus datos están seguros. Te responderemos a la brevedad.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1">
-                    <img src="./psm.png" alt="PSM" class="w-full h-full object-contain">
+                    <img src="./psm.png" alt="Logo PSM Software" class="w-full h-full object-contain">
                 </div>
                 <span class="font-bold text-psm-dark">PSM Software</span>
             </div>
@@ -476,13 +477,13 @@
             </div>
             
             <div class="flex gap-4">
-                <a href="https://www.instagram.com/psmsaas" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/psmsaas" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Visitar nuestro Instagram">
                     <i class="ph ph-instagram-logo text-2xl"></i>
                 </a>
-                <a href="https://wa.me/543454956044" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="WhatsApp">
+                <a href="https://wa.me/543454956044" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Escribirnos por WhatsApp">
                     <i class="ph ph-whatsapp-logo text-2xl"></i>
                 </a>
-                <a href="#contacto" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Email">
+                <a href="#contacto" class="text-slate-400 hover:text-psm-lilac transition-colors" aria-label="Ir al formulario de contacto">
                     <i class="ph ph-envelope-simple text-2xl"></i>
                 </a>
             </div>
