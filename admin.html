@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <script>if (location.hostname.endsWith('github.io')) location.replace('https://psmsaas.pages.dev/admin.html');</script>
+    <title>PSM | Panel</title>
+    <link rel="icon" href="./psm.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        psm: { black: '#000000', dark: '#202225', lilac: '#a85ca1', white: '#ffffff' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #202225; -webkit-font-smoothing: antialiased; }
+        .tabular { font-variant-numeric: tabular-nums; }
+        .field { width: 100%; padding: .75rem 1rem; border-radius: .75rem; border: 1px solid #cbd5e1; background: #fff; outline: none; transition: all .15s; }
+        .field:focus { border-color: #a85ca1; box-shadow: 0 0 0 3px rgba(168,92,161,.2); }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+        .shake { animation: shake .3s ease-in-out 2; }
+        dialog::backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(3px); }
+        dialog { border: none; padding: 0; border-radius: 1.5rem; width: calc(100% - 2rem); max-width: 32rem; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ============ LOGIN ============ -->
+    <section id="vista-login" class="min-h-screen flex items-center justify-center p-4 bg-psm-dark" style="background: radial-gradient(ellipse at top, #2c2530 0%, #202225 55%, #000 100%);">
+        <form id="form-login" class="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="h-1.5 bg-psm-lilac"></div>
+            <div class="p-8">
+                <div class="w-16 h-16 mx-auto mb-5 rounded-full border-2 border-psm-lilac p-2.5 bg-white">
+                    <img src="./psm.png" alt="PSM" class="w-full h-full object-contain">
+                </div>
+                <h1 class="text-xl font-bold text-center mb-1">Panel PSM</h1>
+                <p class="text-sm text-slate-500 text-center mb-7">Acceso restringido</p>
+
+                <label for="usuario" class="block text-sm font-medium text-slate-700 mb-1.5">Usuario</label>
+                <input id="usuario" class="field mb-4" autocomplete="username" required>
+
+                <label for="clave" class="block text-sm font-medium text-slate-700 mb-1.5">Contraseña</label>
+                <div class="relative mb-2">
+                    <input id="clave" type="password" class="field pr-11" autocomplete="current-password" required>
+                    <button type="button" id="ver-clave" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-psm-lilac" aria-label="Mostrar contraseña">
+                        <i class="ph ph-eye text-xl"></i>
+                    </button>
+                </div>
+                <p id="login-error" class="text-sm text-red-600 h-5 mb-3"></p>
+
+                <button class="w-full bg-psm-black text-white py-3.5 rounded-xl font-semibold hover:bg-psm-lilac transition-colors flex items-center justify-center gap-2">
+                    Ingresar <i class="ph ph-sign-in"></i>
+                </button>
+                <a href="./" class="block text-center text-xs text-slate-400 hover:text-psm-lilac mt-5">Volver al sitio</a>
+            </div>
+        </form>
+    </section>
+
+    <!-- ============ TABLERO ============ -->
+    <section id="vista-panel" class="hidden min-h-screen">
+        <header class="bg-psm-dark text-white sticky top-0 z-40 border-b-2 border-psm-lilac">
+            <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-8 h-8 bg-white rounded-full p-1 shrink-0"><img src="./psm.png" alt="" class="w-full h-full object-contain"></div>
+                    <span class="font-bold truncate">Panel de sitios</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span id="estado-guardado" class="hidden sm:flex items-center gap-1.5 text-xs text-slate-300 mr-2"></span>
+                    <button id="btn-config" class="p-2 rounded-lg hover:bg-white/10" title="Conexión con GitHub"><i class="ph ph-gear-six text-xl"></i></button>
+                    <button id="btn-salir" class="p-2 rounded-lg hover:bg-white/10" title="Cerrar sesión"><i class="ph ph-sign-out text-xl"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-5xl mx-auto px-4 py-8">
+            <!-- Aviso: sin conexión a GitHub -->
+            <div id="aviso-token" class="hidden mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-sm flex flex-col sm:flex-row sm:items-center gap-3">
+                <i class="ph ph-warning-circle text-2xl shrink-0"></i>
+                <p class="flex-1">Sin conexión con GitHub: los cambios quedan solo en esta pantalla y <strong>no apagan ni reactivan</strong> ningún sitio hasta que los publiques.</p>
+                <div class="flex gap-2 shrink-0">
+                    <button id="btn-descargar" class="px-3 py-2 rounded-lg bg-white border border-amber-300 font-medium hover:bg-amber-100">Descargar JSON</button>
+                    <button id="btn-config-2" class="px-3 py-2 rounded-lg bg-amber-900 text-white font-medium hover:bg-black">Conectar</button>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                <div class="bg-white rounded-2xl border border-slate-200 p-4"><p class="text-xs text-slate-500 font-medium">Sitios</p><p id="k-total" class="text-2xl font-bold tabular mt-1">0</p></div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-4"><p class="text-xs text-slate-500 font-medium">En línea</p><p id="k-online" class="text-2xl font-bold tabular mt-1 text-emerald-600">0</p></div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-4"><p class="text-xs text-slate-500 font-medium">Vencen en ≤ 3 días</p><p id="k-pronto" class="text-2xl font-bold tabular mt-1 text-amber-600">0</p></div>
+                <div class="bg-white rounded-2xl border border-slate-200 p-4"><p class="text-xs text-slate-500 font-medium">Suspendidos</p><p id="k-susp" class="text-2xl font-bold tabular mt-1 text-red-600">0</p></div>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 mb-4">
+                <h2 class="text-lg font-bold">Sitios administrados</h2>
+                <div class="flex gap-2">
+                    <button id="btn-verificar" class="px-3 py-2 rounded-xl border border-slate-300 bg-white text-sm font-medium hover:border-psm-lilac hover:text-psm-lilac flex items-center gap-1.5"><i class="ph ph-arrows-clockwise"></i><span class="hidden sm:inline">Verificar</span></button>
+                    <button id="btn-agregar" class="px-4 py-2 rounded-xl bg-psm-black text-white text-sm font-semibold hover:bg-psm-lilac flex items-center gap-1.5"><i class="ph ph-plus"></i> Agregar sitio</button>
+                </div>
+            </div>
+
+            <div id="lista" class="space-y-4"></div>
+            <div id="vacio" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300">
+                <i class="ph ph-globe-hemisphere-west text-5xl text-slate-300"></i>
+                <p class="mt-3 font-semibold">Todavía no hay sitios</p>
+                <p class="text-sm text-slate-500">Agregá el primero con el botón “Agregar sitio”.</p>
+            </div>
+        </main>
+    </section>
+
+    <!-- ============ MODAL: SITIO ============ -->
+    <dialog id="modal-sitio">
+        <form id="form-sitio" method="dialog" class="bg-white">
+            <div class="h-1.5 bg-psm-lilac"></div>
+            <div class="p-6 space-y-4">
+                <h3 id="modal-sitio-titulo" class="text-lg font-bold">Agregar sitio</h3>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5" for="s-nombre">Nombre del emprendimiento</label>
+                    <input id="s-nombre" class="field" required placeholder="Ej: Barbería Don Lucas">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5" for="s-url">Dirección (URL)</label>
+                    <input id="s-url" type="url" class="field" required placeholder="https://...">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5" for="s-logo">Logo (URL o ruta, ej: logos/barberia.png)</label>
+                    <input id="s-logo" class="field" placeholder="Opcional">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5" for="s-inicio">Inicio de la cuenta regresiva</label>
+                    <input id="s-inicio" type="datetime-local" class="field" required>
+                    <p class="text-xs text-slate-500 mt-1.5">El sitio se apaga automáticamente un mes exacto después, salvo que confirmes el pago.</p>
+                </div>
+                <label class="flex items-center gap-2.5 text-sm cursor-pointer">
+                    <input id="s-web" type="checkbox" class="w-4 h-4 accent-[#a85ca1]" checked>
+                    Mostrar su logo en “Clientes que apostaron en psmsaas”
+                </label>
+            </div>
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-2">
+                <button type="button" data-cerrar class="px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-200">Cancelar</button>
+                <button type="submit" class="px-5 py-2.5 rounded-xl bg-psm-black text-white text-sm font-semibold hover:bg-psm-lilac">Guardar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- ============ MODAL: CONFIG GITHUB ============ -->
+    <dialog id="modal-config">
+        <form id="form-config" method="dialog" class="bg-white">
+            <div class="h-1.5 bg-psm-lilac"></div>
+            <div class="p-6 space-y-4">
+                <h3 class="text-lg font-bold">Conexión con GitHub</h3>
+                <p class="text-sm text-slate-600">El panel guarda los datos en <code class="bg-slate-100 px-1 rounded">clientes.json</code> de tu repositorio. Es lo que leen los sitios para saber si deben apagarse. El token queda guardado <strong>solo en este navegador</strong>.</p>
+                <div class="grid grid-cols-3 gap-3">
+                    <div><label class="block text-xs font-medium text-slate-600 mb-1" for="c-owner">Usuario</label><input id="c-owner" class="field text-sm" required></div>
+                    <div><label class="block text-xs font-medium text-slate-600 mb-1" for="c-repo">Repositorio</label><input id="c-repo" class="field text-sm" required></div>
+                    <div><label class="block text-xs font-medium text-slate-600 mb-1" for="c-branch">Rama</label><input id="c-branch" class="field text-sm" required></div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-600 mb-1" for="c-token">Token de acceso (fine-grained, permiso “Contents: Read and write”)</label>
+                    <input id="c-token" type="password" class="field text-sm font-mono" placeholder="github_pat_..." autocomplete="off">
+                    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-psm-lilac font-medium mt-1.5 hover:underline">Crear token en GitHub <i class="ph ph-arrow-square-out"></i></a>
+                </div>
+                <p id="config-error" class="text-sm text-red-600"></p>
+            </div>
+            <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-between gap-2">
+                <button type="button" id="btn-olvidar" class="px-3 py-2.5 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50">Olvidar token</button>
+                <div class="flex gap-2">
+                    <button type="button" data-cerrar class="px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-200">Cancelar</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-psm-black text-white text-sm font-semibold hover:bg-psm-lilac">Conectar</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-4 py-3 rounded-xl bg-psm-dark text-white text-sm shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 max-w-[calc(100%-2rem)]"></div>
+
+    <script>
+    (() => {
+        // SHA-256 de "usuario:contraseña" (la contraseña no se guarda en texto plano)
+        const HASH_ACCESO = '709b0723b11b6b61ff85dbfbaa9d875b6c502fd4272641237fa6503b7cb0409e';
+        const K_SESION = 'psm_admin_sesion';
+        const K_CFG = 'psm_admin_cfg';
+        const MES_MS = 30 * 24 * 3600 * 1000;
+
+        const $ = (id) => document.getElementById(id);
+        const guardarLS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+        const leerLS = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } };
+        const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+        let cfg = Object.assign({ owner: 'psmsaas', repo: 'psm', branch: 'main', token: '' }, leerLS(K_CFG) || {});
+        let datos = { clientes: [] };
+        let sha = null;
+        let pendiente = false;
+        const conexion = {}; // id -> 'verificando' | 'online' | 'offline'
+
+        function toast(msg) {
+            const t = $('toast');
+            t.textContent = msg;
+            t.classList.remove('opacity-0');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => t.classList.add('opacity-0'), 3200);
+        }
+
+        // ---------- Fechas ----------
+        function sumarMeses(fecha, n) {
+            const r = new Date(fecha);
+            const dia = r.getDate();
+            r.setDate(1);
+            r.setMonth(r.getMonth() + n);
+            const ultimo = new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate();
+            r.setDate(Math.min(dia, ultimo));
+            return r;
+        }
+        const fmtFecha = (d) => new Date(d).toLocaleString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const aInputLocal = (d) => { const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };
+
+        function cuentaRegresiva(ms) {
+            if (ms <= 0) return 'Vencido';
+            const s = Math.floor(ms / 1000);
+            const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sg = s % 60;
+            const p = (n) => String(n).padStart(2, '0');
+            return `${d}d ${p(h)}h ${p(m)}m ${p(sg)}s`;
+        }
+
+        function estadoPlan(c) {
+            const resta = new Date(c.vence) - Date.now();
+            if (resta <= 0) return { clave: 'susp', txt: 'Suspendido', cls: 'bg-red-50 text-red-700 border-red-200', barra: 'bg-red-500' };
+            if (resta <= 3 * 86400000) return { clave: 'pronto', txt: 'Vence pronto', cls: 'bg-amber-50 text-amber-700 border-amber-200', barra: 'bg-amber-500' };
+            return { clave: 'activo', txt: 'Al día', cls: 'bg-psm-lilac/10 text-psm-lilac border-psm-lilac/30', barra: 'bg-psm-lilac' };
+        }
+
+        // ---------- Login ----------
+        async function sha256(txt) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
+            return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        $('ver-clave').addEventListener('click', () => {
+            const i = $('clave');
+            i.type = i.type === 'password' ? 'text' : 'password';
+        });
+
+        $('form-login').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const h = await sha256(`${$('usuario').value.trim()}:${$('clave').value}`);
+            if (h === HASH_ACCESO) {
+                try { sessionStorage.setItem(K_SESION, '1'); } catch {}
+                entrar();
+            } else {
+                $('login-error').textContent = 'Usuario o contraseña incorrectos';
+                const f = $('form-login');
+                f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+                $('clave').value = '';
+            }
+        });
+
+        $('btn-salir').addEventListener('click', () => {
+            try { sessionStorage.removeItem(K_SESION); } catch {}
+            location.href = './';
+        });
+
+        // ---------- Datos (GitHub) ----------
+        const apiUrl = () => `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/clientes.json`;
+        const apiHeaders = () => ({ Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github+json' });
+        const b64enc = (s) => btoa(unescape(encodeURIComponent(s)));
+        const b64dec = (s) => decodeURIComponent(escape(atob(s.replace(/\n/g, ''))));
+
+        async function cargar() {
+            try {
+                if (cfg.token) {
+                    const r = await fetch(`${apiUrl()}?ref=${encodeURIComponent(cfg.branch)}&t=${Date.now()}`, { headers: apiHeaders(), cache: 'no-store' });
+                    if (r.status === 404) { datos = { clientes: [] }; sha = null; }
+                    else if (!r.ok) throw new Error(r.status === 401 ? 'Token inválido o vencido' : `GitHub respondió ${r.status}`);
+                    else { const j = await r.json(); sha = j.sha; datos = JSON.parse(b64dec(j.content)); }
+                } else {
+                    const r = await fetch(`clientes.json?t=${Date.now()}`, { cache: 'no-store' });
+                    datos = r.ok ? await r.json() : { clientes: [] };
+                }
+            } catch (err) {
+                toast(`No se pudieron cargar los datos: ${err.message}`);
+            }
+            if (!Array.isArray(datos.clientes)) datos.clientes = [];
+        }
+
+        async function publicar(mensaje) {
+            if (!cfg.token) { pendiente = true; return true; }
+            marcarGuardado('guardando');
+            const body = {
+                message: `PSM panel: ${mensaje}`,
+                content: b64enc(JSON.stringify(datos, null, 2) + '\n'),
+                branch: cfg.branch,
+            };
+            if (sha) body.sha = sha;
+            try {
+                const r = await fetch(apiUrl(), { method: 'PUT', headers: { ...apiHeaders(), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+                if (r.status === 409 || r.status === 422) throw new Error('los datos cambiaron en otro lado; recargá la página y repetí la acción');
+                if (!r.ok) throw new Error(`GitHub respondió ${r.status}`);
+                sha = (await r.json()).content.sha;
+                marcarGuardado('ok');
+                return true;
+            } catch (err) {
+                marcarGuardado('error');
+                toast(`No se guardó: ${err.message}`);
+                return false;
+            }
+        }
+
+        async function mutar(fn, mensaje) {
+            const antes = JSON.stringify(datos);
+            fn(datos);
+            const ok = await publicar(mensaje);
+            if (!ok) datos = JSON.parse(antes);
+            render();
+            return ok;
+        }
+
+        function marcarGuardado(estado) {
+            const el = $('estado-guardado');
+            el.classList.remove('hidden'); el.classList.add('sm:flex');
+            el.innerHTML = {
+                guardando: '<i class="ph ph-circle-notch animate-spin"></i> Guardando…',
+                ok: '<i class="ph ph-check-circle text-emerald-400"></i> Publicado',
+                error: '<i class="ph ph-x-circle text-red-400"></i> Error al guardar',
+            }[estado];
+        }
+
+        // ---------- Conexión de los sitios ----------
+        async function ping(url) {
+            const ctl = new AbortController();
+            const t = setTimeout(() => ctl.abort(), 8000);
+            try { await fetch(url, { mode: 'no-cors', cache: 'no-store', signal: ctl.signal }); return true; }
+            catch { return false; }
+            finally { clearTimeout(t); }
+        }
+
+        async function verificarTodos() {
+            datos.clientes.forEach((c) => { conexion[c.id] = 'verificando'; });
+            render();
+            await Promise.all(datos.clientes.map(async (c) => {
+                conexion[c.id] = (await ping(c.url)) ? 'online' : 'offline';
+            }));
+            render();
+        }
+
+        // ---------- Render ----------
+        function snippet(c) {
+            const base = new URL('./', location.href).href;
+            return `<script src="${base}psm-guard.js" data-cliente="${c.id}" defer><\/script>`;
+        }
+
+        function render() {
+            const lista = $('lista');
+            const cs = [...datos.clientes].sort((a, b) => new Date(a.vence) - new Date(b.vence));
+            $('vacio').classList.toggle('hidden', cs.length > 0);
+            $('aviso-token').classList.toggle('hidden', !!cfg.token);
+            $('aviso-token').classList.toggle('flex', !cfg.token);
+
+            $('k-total').textContent = cs.length;
+            $('k-online').textContent = cs.filter((c) => conexion[c.id] === 'online').length;
+            $('k-pronto').textContent = cs.filter((c) => estadoPlan(c).clave === 'pronto').length;
+            $('k-susp').textContent = cs.filter((c) => estadoPlan(c).clave === 'susp').length;
+
+            lista.innerHTML = cs.map((c) => {
+                const plan = estadoPlan(c);
+                const con = conexion[c.id];
+                const conHtml = con === 'online'
+                    ? '<span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>En línea</span>'
+                    : con === 'offline'
+                    ? '<span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200"><span class="w-2 h-2 rounded-full bg-slate-400"></span>Sin respuesta</span>'
+                    : '<span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-50 text-slate-500 border border-slate-200"><i class="ph ph-circle-notch animate-spin"></i>Verificando</span>';
+                const logo = c.logo
+                    ? `<img src="${esc(c.logo)}" alt="" class="w-full h-full object-contain" onerror="this.replaceWith(document.createTextNode('${esc(c.nombre).charAt(0).toUpperCase()}'))">`
+                    : esc(c.nombre).charAt(0).toUpperCase();
+                return `
+                <article class="bg-white rounded-2xl border ${plan.clave === 'susp' ? 'border-red-200' : 'border-slate-200'} overflow-hidden">
+                    <div class="p-5 flex flex-col md:flex-row md:items-center gap-5">
+                        <div class="flex items-center gap-3.5 min-w-0 flex-1">
+                            <div class="w-12 h-12 rounded-full border border-slate-200 bg-white p-1.5 shrink-0 flex items-center justify-center font-bold text-psm-lilac overflow-hidden">${logo}</div>
+                            <div class="min-w-0">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <h3 class="font-bold truncate">${esc(c.nombre)}</h3>
+                                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full border ${plan.cls}">${plan.txt}</span>
+                                    ${conHtml}
+                                </div>
+                                <a href="${esc(c.url)}" target="_blank" rel="noopener" class="text-sm text-slate-500 hover:text-psm-lilac truncate block">${esc(c.url)}</a>
+                            </div>
+                        </div>
+                        <div class="md:w-64 shrink-0">
+                            <div class="flex items-baseline justify-between gap-2">
+                                <span class="text-xs text-slate-500">Vence ${fmtFecha(c.vence)}</span>
+                            </div>
+                            <p class="font-bold tabular text-lg ${plan.clave === 'susp' ? 'text-red-600' : ''}" data-cuenta="${esc(c.id)}" data-plan="${plan.clave}">${cuentaRegresiva(new Date(c.vence) - Date.now())}</p>
+                            <div class="h-1.5 rounded-full bg-slate-100 overflow-hidden mt-1.5"><div class="h-full rounded-full ${plan.barra}" data-barra="${esc(c.id)}"></div></div>
+                        </div>
+                        <button data-accion="pagar" data-id="${esc(c.id)}" class="shrink-0 px-4 py-3 rounded-xl ${plan.clave === 'susp' ? 'bg-psm-lilac' : 'bg-psm-black'} text-white text-sm font-semibold hover:bg-psm-lilac flex items-center justify-center gap-1.5">
+                            <i class="ph ph-check-circle text-lg"></i> ${plan.clave === 'susp' ? 'Confirmar pago y reactivar' : 'Confirmar pago'}
+                        </button>
+                    </div>
+                    <div class="px-5 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center gap-1 flex-wrap text-xs">
+                        <span class="text-slate-400 mr-auto">${c.ultimoPago ? 'Último pago: ' + fmtFecha(c.ultimoPago) : 'Inicio: ' + fmtFecha(c.inicio)}</span>
+                        <button data-accion="codigo" data-id="${esc(c.id)}" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-200 font-medium flex items-center gap-1"><i class="ph ph-code"></i> Copiar código</button>
+                        <button data-accion="editar" data-id="${esc(c.id)}" class="px-2.5 py-1.5 rounded-lg hover:bg-slate-200 font-medium flex items-center gap-1"><i class="ph ph-pencil-simple"></i> Editar</button>
+                        <button data-accion="borrar" data-id="${esc(c.id)}" class="px-2.5 py-1.5 rounded-lg hover:bg-red-50 text-red-600 font-medium flex items-center gap-1"><i class="ph ph-trash"></i> Quitar</button>
+                    </div>
+                </article>`;
+            }).join('');
+            tick();
+        }
+
+        function tick() {
+            const ahora = Date.now();
+            let redibujar = false;
+            datos.clientes.forEach((c) => {
+                const el = document.querySelector(`[data-cuenta="${CSS.escape(c.id)}"]`);
+                if (!el) return;
+                const resta = new Date(c.vence) - ahora;
+                el.textContent = cuentaRegresiva(resta);
+                const ini = new Date(c.cicloInicio || c.inicio).getTime();
+                const total = new Date(c.vence).getTime() - ini || MES_MS;
+                const barra = document.querySelector(`[data-barra="${CSS.escape(c.id)}"]`);
+                if (barra) barra.style.width = `${Math.max(0, Math.min(100, (resta / total) * 100))}%`;
+                // Si vence mientras el panel está abierto, redibujar una sola vez para mostrarlo suspendido
+                if (resta <= 0 && el.dataset.plan !== 'susp') redibujar = true;
+            });
+            if (redibujar) render();
+        }
+
+        // ---------- Acciones ----------
+        let editandoId = null;
+
+        function abrirSitio(c) {
+            editandoId = c ? c.id : null;
+            $('modal-sitio-titulo').textContent = c ? 'Editar sitio' : 'Agregar sitio';
+            $('s-nombre').value = c ? c.nombre : '';
+            $('s-url').value = c ? c.url : '';
+            $('s-logo').value = c ? (c.logo || '') : '';
+            $('s-inicio').value = aInputLocal(c ? c.inicio : new Date());
+            $('s-web').checked = c ? c.mostrarEnWeb !== false : true;
+            $('modal-sitio').showModal();
+        }
+
+        $('btn-agregar').addEventListener('click', () => abrirSitio(null));
+
+        $('form-sitio').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const inicio = new Date($('s-inicio').value).toISOString();
+            const campos = {
+                nombre: $('s-nombre').value.trim(),
+                url: $('s-url').value.trim(),
+                logo: $('s-logo').value.trim(),
+                mostrarEnWeb: $('s-web').checked,
+            };
+            $('modal-sitio').close();
+            if (editandoId) {
+                await mutar((d) => {
+                    const c = d.clientes.find((x) => x.id === editandoId);
+                    Object.assign(c, campos);
+                    if (c.inicio !== inicio && !c.ultimoPago) {
+                        c.inicio = inicio;
+                        c.cicloInicio = inicio;
+                        c.vence = sumarMeses(inicio, 1).toISOString();
+                    }
+                }, `editar ${campos.nombre}`);
+            } else {
+                const base = campos.nombre.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30) || 'sitio';
+                const id = `${base}-${Math.random().toString(36).slice(2, 6)}`;
+                const ok = await mutar((d) => {
+                    d.clientes.push({ id, ...campos, inicio, cicloInicio: inicio, vence: sumarMeses(inicio, 1).toISOString(), pagos: [] });
+                }, `agregar ${campos.nombre}`);
+                if (ok) {
+                    conexion[id] = 'verificando'; render();
+                    conexion[id] = (await ping(campos.url)) ? 'online' : 'offline'; render();
+                    toast('Sitio agregado. Copiá su código y pegalo en el sitio del cliente.');
+                }
+            }
+        });
+
+        $('lista').addEventListener('click', async (e) => {
+            const btn = e.target.closest('[data-accion]');
+            if (!btn) return;
+            const c = datos.clientes.find((x) => x.id === btn.dataset.id);
+            if (!c) return;
+
+            if (btn.dataset.accion === 'pagar') {
+                const vencido = new Date(c.vence) <= Date.now();
+                const desde = vencido ? new Date() : new Date(c.vence);
+                const hasta = sumarMeses(desde, 1);
+                if (!confirm(`¿Confirmar el pago de "${c.nombre}"?\n\nEl servicio quedará activo hasta el ${fmtFecha(hasta)}.`)) return;
+                const ok = await mutar((d) => {
+                    const x = d.clientes.find((y) => y.id === c.id);
+                    const ahora = new Date().toISOString();
+                    x.cicloInicio = desde.toISOString();
+                    x.vence = hasta.toISOString();
+                    x.ultimoPago = ahora;
+                    (x.pagos = x.pagos || []).push({ fecha: ahora, hasta: x.vence });
+                }, `pago confirmado ${c.nombre}`);
+                if (ok) toast(vencido ? 'Pago registrado. El sitio se reactiva en 1–2 minutos.' : 'Pago registrado.');
+            }
+            if (btn.dataset.accion === 'codigo') {
+                try { await navigator.clipboard.writeText(snippet(c)); toast('Código copiado. Pegalo antes de </body> en el sitio del cliente.'); }
+                catch { prompt('Copiá este código:', snippet(c)); }
+            }
+            if (btn.dataset.accion === 'editar') abrirSitio(c);
+            if (btn.dataset.accion === 'borrar') {
+                if (!confirm(`¿Quitar "${c.nombre}" del panel?\n\nEl sitio dejará de estar controlado (no se apagará más).`)) return;
+                await mutar((d) => { d.clientes = d.clientes.filter((x) => x.id !== c.id); }, `quitar ${c.nombre}`);
+            }
+        });
+
+        $('btn-verificar').addEventListener('click', verificarTodos);
+
+        $('btn-descargar').addEventListener('click', () => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([JSON.stringify(datos, null, 2) + '\n'], { type: 'application/json' }));
+            a.download = 'clientes.json';
+            a.click();
+            pendiente = false;
+        });
+
+        // ---------- Config ----------
+        function abrirConfig() {
+            $('c-owner').value = cfg.owner; $('c-repo').value = cfg.repo; $('c-branch').value = cfg.branch; $('c-token').value = cfg.token;
+            $('config-error').textContent = '';
+            $('modal-config').showModal();
+        }
+        $('btn-config').addEventListener('click', abrirConfig);
+        $('btn-config-2').addEventListener('click', abrirConfig);
+        $('btn-olvidar').addEventListener('click', () => {
+            cfg.token = ''; guardarLS(K_CFG, cfg); $('modal-config').close(); render(); toast('Token eliminado de este navegador.');
+        });
+        $('form-config').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nuevo = { owner: $('c-owner').value.trim(), repo: $('c-repo').value.trim(), branch: $('c-branch').value.trim(), token: $('c-token').value.trim() };
+            const r = await fetch(`https://api.github.com/repos/${nuevo.owner}/${nuevo.repo}`, { headers: { Authorization: `Bearer ${nuevo.token}`, Accept: 'application/vnd.github+json' } }).catch(() => null);
+            if (!r || !r.ok) { $('config-error').textContent = 'No se pudo acceder al repositorio con ese token.'; return; }
+            const locales = pendiente ? JSON.stringify(datos) : null;
+            cfg = nuevo; guardarLS(K_CFG, cfg);
+            $('modal-config').close();
+            await cargar();
+            if (locales) { datos = JSON.parse(locales); pendiente = false; await publicar('sincronizar cambios locales'); }
+            render(); verificarTodos();
+            toast('Conectado con GitHub.');
+        });
+
+        document.querySelectorAll('[data-cerrar]').forEach((b) => b.addEventListener('click', () => b.closest('dialog').close()));
+
+        window.addEventListener('beforeunload', (e) => { if (pendiente) { e.preventDefault(); e.returnValue = ''; } });
+
+        // ---------- Inicio ----------
+        async function entrar() {
+            $('vista-login').classList.add('hidden');
+            $('vista-panel').classList.remove('hidden');
+            await cargar();
+            render();
+            verificarTodos();
+            setInterval(tick, 1000);
+            setInterval(verificarTodos, 5 * 60 * 1000);
+        }
+
+        let sesion = null;
+        try { sesion = sessionStorage.getItem(K_SESION); } catch {}
+        if (sesion === '1') entrar(); else $('usuario').focus();
+    })();
+    </script>
+</body>
+</html>

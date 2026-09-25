@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
+    <!-- Mudanza: el link viejo de GitHub Pages redirige al sitio nuevo -->
+    <script>if (location.hostname.endsWith('github.io')) location.replace('https://psmsaas.pages.dev' + location.pathname.replace(/^\/psm/, '') + location.search + location.hash);</script>
+
     <!-- SEO BÁSICO -->
     <title>PSM | Software de Gestión de Caja y Turnos para Negocios u Emprendimientos</title>
     <meta name="description" content="Simplifica el control de tu emprendimiento con PSM. Sistema online para gestionar caja diaria, turnos, balances y gastos. Ideal para kioscos, peluquerías y gimnasios.">
@@ -13,24 +16,24 @@
     <meta name="theme-color" content="#ffffff">
     
     <!-- URL CANÓNICA (Evita contenido duplicado) -->
-    <link rel="canonical" href="https://psmsaas.github.io/psm/">
+    <link rel="canonical" href="https://psmsaas.pages.dev/">
 
     <!-- VERIFICACIÓN DE GOOGLE SEARCH CONSOLE -->
     <meta name="google-site-verification" content="D57tgPkjuJZmoekz7oz3YFp7dSZ7ofYsY_o5IlD9t9s" />
 
     <!-- OPEN GRAPH (Para compartir en WhatsApp, Facebook, LinkedIn) -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://psmsaas.github.io/psm/">
+    <meta property="og:url" content="https://psmsaas.pages.dev/">
     <meta property="og:title" content="PSM | Control Total de tu Negocio">
     <meta property="og:description" content="Olvídate de los cuadernos. Gestiona tu caja, turnos y gastos desde tu celular o PC. Sistema a medida para tu rubro.">
-    <meta property="og:image" content="https://psmsaas.github.io/psm/PSM2.png">
+    <meta property="og:image" content="https://psmsaas.pages.dev/PSM2.png">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://psmsaas.github.io/psm/">
+    <meta name="twitter:url" content="https://psmsaas.pages.dev/">
     <meta name="twitter:title" content="PSM | Software de Gestión para Emprendedores">
     <meta name="twitter:description" content="Sistema online para gestionar caja diaria, turnos, balances y gastos. Económico y fácil de usar.">
-    <meta name="twitter:image" content="https://psmsaas.github.io/psm/psm.png">
+    <meta name="twitter:image" content="https://psmsaas.pages.dev/psm.png">
 
     <!-- DATOS ESTRUCTURADOS (JSON-LD) PARA GOOGLE -->
     <script type="application/ld+json">
@@ -41,7 +44,7 @@
       "operatingSystem": "Web, Windows, Android, iOS",
       "applicationCategory": "BusinessApplication",
       "description": "Software de gestión online para kioscos, peluquerías, gimnasios y depósitos.",
-      "url": "https://psmsaas.github.io/psm/",
+      "url": "https://psmsaas.pages.dev/",
       "offers": {
         "@type": "Offer",
         "price": "25000",
@@ -50,12 +53,12 @@
       "creator": {
         "@type": "Organization",
         "name": "PSM",
-        "url": "https://psmsaas.github.io/psm/",
+        "url": "https://psmsaas.pages.dev/",
         "contactPoint": {
           "@type": "ContactPoint",
           "email": "catrismperez505@gmail.com",
           "contactType": "customer support",
-          "url": "https://psmsaas.github.io/psm/#contacto"
+          "url": "https://psmsaas.pages.dev/#contacto"
         }
       }
     }
@@ -153,6 +156,110 @@
         .animate-counter-orbit {
             animation: orbit-counter-spin 22s linear infinite;
         }
+
+        /* Logo de la barra: evita menú contextual / selección al mantener pulsado */
+        #logo-inicio {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        #logo-inicio img { pointer-events: none; }
+
+        /* ===== CARRUSEL DE GLOBOS ===== */
+        .globos-viewport {
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        }
+        .globos-pista {
+            display: flex;
+            width: max-content;
+            animation: globos-desfile var(--duracion, 40s) linear infinite;
+        }
+        .globos-viewport:hover .globos-pista { animation-play-state: paused; }
+        @keyframes globos-desfile {
+            from { transform: translateX(-50%); }
+            to   { transform: translateX(0); }
+        }
+
+        .globo {
+            flex: none;
+            width: 190px;
+            padding: 0 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: globo-flotar 4.5s ease-in-out infinite;
+        }
+        @keyframes globo-flotar {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50%      { transform: translateY(-14px) rotate(2deg); }
+        }
+        .globo-cuerpo {
+            position: relative;
+            width: 146px;
+            height: 170px;
+            border-radius: 50% 50% 50% 50% / 44% 44% 56% 56%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset -14px -18px 30px rgba(0, 0, 0, 0.25), 0 18px 30px -12px rgba(32, 34, 37, 0.35);
+            transition: transform 0.3s ease;
+        }
+        .globo:hover .globo-cuerpo { transform: scale(1.06); }
+        /* Brillo */
+        .globo-cuerpo::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            width: 26px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            transform: rotate(28deg);
+            filter: blur(1px);
+        }
+        .globo-logo {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #a85ca1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+        .globo-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .globo-nudo {
+            width: 16px;
+            height: 12px;
+            margin-top: -3px;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        }
+        .globo-hilo { display: block; }
+
+        .globo-lila   .globo-cuerpo, .globo-lila   .globo-nudo { background: radial-gradient(circle at 35% 30%, #c98ac3, #a85ca1 55%, #8a4884); }
+        .globo-oscuro .globo-cuerpo, .globo-oscuro .globo-nudo { background: radial-gradient(circle at 35% 30%, #4a4d52, #202225 60%, #111214); }
+        .globo-negro  .globo-cuerpo, .globo-negro  .globo-nudo { background: radial-gradient(circle at 35% 30%, #333, #000 60%); }
+        .globo-blanco .globo-cuerpo, .globo-blanco .globo-nudo { background: radial-gradient(circle at 35% 30%, #fff, #f1f1f4 55%, #d9d9e0); }
+        .globo-blanco .globo-logo { box-shadow: 0 0 0 3px #a85ca1; }
+
+        @media (max-width: 640px) {
+            .globo { width: 150px; padding: 0 14px; }
+            .globo-cuerpo { width: 118px; height: 138px; }
+            .globo-logo { width: 74px; height: 74px; padding: 11px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .globos-pista, .globo { animation: none; }
+            .globos-viewport { overflow-x: auto; }
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
@@ -162,7 +269,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo Izquierda -->
-                <a href="#" class="flex items-center gap-2 group" aria-label="Inicio PSM Software">
+                <a href="#" id="logo-inicio" draggable="false" class="flex items-center gap-2 group" aria-label="Volver al inicio">
                     <div class="w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1 group-hover:border-psm-lilac transition-colors">
                         <img src="./psm.png" alt="Logo PSM Pequeño" class="w-full h-full object-contain">
                     </div>
@@ -429,7 +536,7 @@
                         <input type="hidden" name="_subject" value="¡Nuevo Presupuesto PSM Solicitado!">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://psmsaas.github.io/psm/">
+                        <input type="hidden" name="_next" value="https://psmsaas.pages.dev/">
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -458,6 +565,19 @@
                         <p class="text-center text-xs text-slate-500 mt-4">Tus datos están seguros. Te responderemos a la brevedad.</p>
                     </form>
                 </div>
+            </div>
+        </section>
+
+        <!-- CLIENTES (GLOBOS) — se completa desde clientes.json; oculto si no hay logos -->
+        <section id="clientes" class="hidden py-20 bg-slate-50 border-t border-slate-100 overflow-hidden" aria-labelledby="clientes-titulo">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white text-slate-700 text-xs font-semibold mb-4 border border-slate-200">
+                    <i class="ph ph-heart text-psm-lilac"></i> Confían en nosotros
+                </div>
+                <h2 id="clientes-titulo" class="text-3xl font-bold text-psm-dark">Clientes que apostaron en <span class="text-psm-lilac">psmsaas</span></h2>
+            </div>
+            <div class="globos-viewport pt-4">
+                <div id="globos-pista" class="globos-pista"></div>
             </div>
         </section>
     </main>
@@ -490,5 +610,76 @@
         </div>
     </footer>
 
+    <script>
+        // Logo de la barra: toque corto = volver arriba · mantener 10 s = panel de administración
+        (() => {
+            const logo = document.getElementById('logo-inicio');
+            const ESPERA_MS = 10000;
+            let timer = null;
+            let disparado = false;
+
+            const cancelar = () => { clearTimeout(timer); timer = null; };
+
+            logo.addEventListener('pointerdown', (e) => {
+                if (e.button !== 0) return;
+                disparado = false;
+                cancelar();
+                timer = setTimeout(() => {
+                    disparado = true;
+                    window.location.href = 'admin.html';
+                }, ESPERA_MS);
+            });
+            ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => logo.addEventListener(ev, cancelar));
+            logo.addEventListener('contextmenu', (e) => e.preventDefault());
+            logo.addEventListener('dragstart', (e) => e.preventDefault());
+
+            logo.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (disparado) return;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                history.replaceState(null, '', location.pathname + location.search);
+            });
+        })();
+
+        // Carrusel de globos con los clientes (desde clientes.json)
+        (() => {
+            const COLORES = ['globo-lila', 'globo-oscuro', 'globo-blanco', 'globo-negro'];
+            const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+            const globo = (c, i) => `
+                <div class="globo ${COLORES[i % COLORES.length]}" style="animation-delay:${-(i * 0.7) % 4.5}s">
+                    <div class="globo-cuerpo">
+                        <div class="globo-logo">
+                            <img src="${esc(c.logo)}" alt="${esc(c.nombre)}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${esc(c.nombre).charAt(0).toUpperCase()}'))">
+                        </div>
+                    </div>
+                    <div class="globo-nudo"></div>
+                    <svg class="globo-hilo" width="20" height="70" viewBox="0 0 20 70" aria-hidden="true">
+                        <path d="M10 0 C 2 14, 18 24, 10 36 S 2 58, 10 70" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+                    </svg>
+                </div>`;
+
+            fetch('clientes.json?t=' + Date.now(), { cache: 'no-store' })
+                .then((r) => (r.ok ? r.json() : null))
+                .then((data) => {
+                    const ahora = Date.now();
+                    const lista = ((data && data.clientes) || []).filter((c) =>
+                        c.logo && c.mostrarEnWeb !== false && (!c.vence || new Date(c.vence).getTime() > ahora));
+                    if (!lista.length) return;
+
+                    // Repetimos hasta tener suficientes globos para cubrir pantallas anchas
+                    let tanda = [];
+                    while (tanda.length < 10) tanda = tanda.concat(lista);
+
+                    const pista = document.getElementById('globos-pista');
+                    const html = tanda.map(globo).join('');
+                    pista.innerHTML = html + html; // duplicado para bucle continuo
+                    pista.querySelectorAll('.globo').forEach((g, i) => { if (i >= tanda.length) g.setAttribute('aria-hidden', 'true'); });
+                    pista.style.setProperty('--duracion', `${tanda.length * 4}s`);
+                    document.getElementById('clientes').classList.remove('hidden');
+                })
+                .catch(() => {});
+        })();
+    </script>
 </body>
 </html>

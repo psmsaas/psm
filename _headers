@@ -1,0 +1,15 @@
+# Configuración de Cloudflare Pages
+
+# Estado de los clientes: siempre fresco y legible desde los sitios de los clientes
+/clientes.json
+  Cache-Control: no-store
+  Access-Control-Allow-Origin: *
+
+# Script de control: caché corta para que los cambios lleguen rápido
+/psm-guard.js
+  Cache-Control: public, max-age=300
+  Access-Control-Allow-Origin: *
+
+# Panel privado: fuera de Google
+/admin*
+  X-Robots-Tag: noindex, nofollow
