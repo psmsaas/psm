@@ -26,7 +26,7 @@
     <meta property="og:url" content="https://psmsaas.pages.dev/">
     <meta property="og:title" content="PSM | Control Total de tu Negocio">
     <meta property="og:description" content="Olvídate de los cuadernos. Gestiona tu caja, turnos y gastos desde tu celular o PC. Sistema a medida para tu rubro.">
-    <meta property="og:image" content="https://psmsaas.pages.dev/PSM2.png">
+    <meta property="og:image" content="https://psmsaas.pages.dev/psmseo.jpeg">
 
     <!-- TWITTER CARDS -->
     <meta name="twitter:card" content="summary_large_image">
@@ -165,6 +165,19 @@
             touch-action: manipulation;
         }
         #logo-inicio img { pointer-events: none; }
+        /* Anillo de progreso al mantener pulsado (aparece recién al 1,5 s) */
+        #logo-anillo {
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            background: conic-gradient(#a85ca1 calc(var(--progreso, 0) * 1%), transparent 0);
+            -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
+            mask: radial-gradient(circle, transparent 58%, #000 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        #logo-anillo.visible { opacity: 1; }
 
         /* ===== CARRUSEL DE GLOBOS ===== */
         .globos-viewport {
@@ -270,7 +283,8 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo Izquierda -->
                 <a href="#" id="logo-inicio" draggable="false" class="flex items-center gap-2 group" aria-label="Volver al inicio">
-                    <div class="w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1 group-hover:border-psm-lilac transition-colors">
+                    <div class="relative w-8 h-8 bg-psm-white rounded-full border border-slate-200 flex items-center justify-center p-1 group-hover:border-psm-lilac transition-colors">
+                        <span id="logo-anillo" aria-hidden="true"></span>
                         <img src="./psm.png" alt="Logo PSM Pequeño" class="w-full h-full object-contain">
                     </div>
                     <span class="font-bold text-psm-dark group-hover:text-psm-lilac transition-colors">PSM</span>
@@ -614,31 +628,58 @@
         // Logo de la barra: toque corto = volver arriba · mantener 10 s = panel de administración
         (() => {
             const logo = document.getElementById('logo-inicio');
+            const anillo = document.getElementById('logo-anillo');
             const ESPERA_MS = 10000;
-            let timer = null;
-            let disparado = false;
+            const MOSTRAR_DESDE_MS = 1500;
+            let inicio = 0;
+            let raf = null;
 
-            const cancelar = () => { clearTimeout(timer); timer = null; };
-
-            logo.addEventListener('pointerdown', (e) => {
-                if (e.button !== 0) return;
-                disparado = false;
-                cancelar();
-                timer = setTimeout(() => {
-                    disparado = true;
-                    window.location.href = 'admin.html';
-                }, ESPERA_MS);
-            });
-            ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => logo.addEventListener(ev, cancelar));
-            logo.addEventListener('contextmenu', (e) => e.preventDefault());
-            logo.addEventListener('dragstart', (e) => e.preventDefault());
-
-            logo.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (disparado) return;
+            const irArriba = () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 history.replaceState(null, '', location.pathname + location.search);
-            });
+            };
+
+            const animar = () => {
+                const t = Date.now() - inicio;
+                anillo.classList.toggle('visible', t >= MOSTRAR_DESDE_MS);
+                anillo.style.setProperty('--progreso', Math.min(100, (t / ESPERA_MS) * 100));
+                if (t >= ESPERA_MS) {
+                    detener();
+                    window.location.href = 'admin.html';
+                    return;
+                }
+                raf = requestAnimationFrame(animar);
+            };
+
+            const empezar = () => {
+                detener();
+                inicio = Date.now();
+                raf = requestAnimationFrame(animar);
+            };
+
+            // Devuelve true si fue un toque corto (todavía no se llegó a los 10 s)
+            const detener = () => {
+                const activo = raf !== null;
+                cancelAnimationFrame(raf);
+                raf = null;
+                anillo.classList.remove('visible');
+                anillo.style.setProperty('--progreso', 0);
+                return activo && Date.now() - inicio < ESPERA_MS;
+            };
+
+            // Celulares: se toma el control del toque para que el navegador
+            // no lo interrumpa con su menú de "mantener pulsado" sobre links
+            logo.addEventListener('touchstart', (e) => { e.preventDefault(); empezar(); }, { passive: false });
+            logo.addEventListener('touchend', (e) => { e.preventDefault(); if (detener()) irArriba(); });
+            logo.addEventListener('touchcancel', detener);
+
+            // PC: se puede mover un poco el mouse; solo cuenta soltar el botón
+            logo.addEventListener('mousedown', (e) => { if (e.button === 0) empezar(); });
+            document.addEventListener('mouseup', detener);
+
+            logo.addEventListener('contextmenu', (e) => e.preventDefault());
+            logo.addEventListener('dragstart', (e) => e.preventDefault());
+            logo.addEventListener('click', (e) => { e.preventDefault(); irArriba(); });
         })();
 
         // Carrusel de globos con los clientes (desde clientes.json)
